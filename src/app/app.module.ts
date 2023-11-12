@@ -3,10 +3,15 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NavbarComponent } from './navbar/navbar.component';
-import { SearchComponent } from './search/search.component';
-import { ProfesionalesComponent } from './profesionales/profesionales.component';
-import { FooterComponent } from './footer/footer.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { SearchComponent } from './components/search/search.component';
+import { ProfesionalesComponent } from './components/profesionales/profesionales.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { RegistroComponent } from './components/registro/registro.component';
+import { HomeComponent } from './pages/home/home.component';
+import { SingUpComponent } from './pages/sing-up/sing-up.component';
+import { ModalSelectComponent } from './pages/modal-select/modal-select.component';
+import { SelectPerfilComponent } from './components/select-perfil/select-perfil.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +19,12 @@ import { FooterComponent } from './footer/footer.component';
     NavbarComponent,
     SearchComponent,
     ProfesionalesComponent,
-    FooterComponent
+    FooterComponent,
+    RegistroComponent,
+    HomeComponent,
+    SingUpComponent,
+    ModalSelectComponent,
+    SelectPerfilComponent
   ],
   imports: [
     BrowserModule,

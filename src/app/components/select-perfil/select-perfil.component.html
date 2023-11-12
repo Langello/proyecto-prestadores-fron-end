@@ -1,0 +1,89 @@
+<h1 class="text-center mt-5">¿Que tipo de perfil eres?</h1>
+<div class="container">
+    <div id="botones" class="d-flex justify-content-center align-items-center mt-5 mb-5">
+        <button type="button" class="btn btn-success me-5 btn-lg" data-bs-toggle="modal"
+            data-bs-target="#consumidorModal">
+            Soy Consumidor
+        </button>
+        <button type="button" class="btn btn-warning btn-lg" data-bs-toggle="modal" data-bs-target="#prestadorModal">
+            Soy Prestador
+        </button>
+    </div>
+
+    <div class="modal fade" id="consumidorModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Ficha de Consumidor</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form id="consumidorForm">
+                    <div class="modal-body">
+
+                        <div class="mb-3">
+                            <label for="metodoPago" class="form-label">Método de Pago</label>
+                            <input type="text" class="form-control" id="metodoPago"
+                                placeholder="Ingrese su método de pago">
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Confirmar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="prestadorModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Ficha de Prestador</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form id="prestadorForm">
+                    <div class="modal-body">
+
+                        <div class="mb-3">
+                            <label for="cuilCuit" class="form-label">CUIL/CUIT</label>
+                            <input type="text" class="form-control" id="cuilCuit" placeholder="Ingrese su CUIL/CUIT">
+                        </div>
+                        <div class="mb-3">
+                            <label for="descripcion" class="form-label">Descripción del Prestador</label>
+                            <textarea class="form-control" id="descripcion" rows="3"
+                                placeholder="Ingrese la descripción del prestador"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="fotosTrabajos" class="form-label">Fotos de Trabajos Realizados</label>
+                            <input type="text" class="form-control" id="fotosTrabajos">
+                        </div>
+                        <div class="mb-3">
+                            <label for="horariosAtencion" class="form-label">Horarios de Atención</label>
+                            <input type="text" class="form-control" id="horariosAtencion"
+                                placeholder="Ingrese los horarios de atención">
+                        </div>
+                        <div class="mb-3">
+                            <label for="disponibilidad" class="form-label">Disponibilidad</label>
+                            <select class="form-select" id="disponibilidad">
+                                <option value="true">Disponible</option>
+                                <option value="false">No disponible</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="radioCobertura" class="form-label">Radio de Cobertura</label>
+                            <input type="text" class="form-control" id="radioCobertura"
+                                placeholder="Ingrese el radio de cobertura">
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Confirmar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
