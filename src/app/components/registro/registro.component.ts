@@ -9,9 +9,22 @@ import axios from 'axios';
   styleUrls: ['./registro.component.css'],
 })
 export class RegistroComponent implements OnInit {
-  usuarioForm!: FormGroup; 
+  usuarioForm!: FormGroup;
+  showPassword: boolean = false;
 
   constructor(private fb: FormBuilder, private router: Router) {}
+
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
+
+    if (this.showPassword) {
+      document.getElementById('password')?.setAttribute('type', 'text');
+    }
+
+    if (!this.showPassword) {
+      document.getElementById('password')?.setAttribute('type', 'password');
+    }
+  }
 
   ngOnInit(): void {
     this.usuarioForm = this.fb.group({
@@ -24,6 +37,9 @@ export class RegistroComponent implements OnInit {
       fechaNacimiento: ['', Validators.required],
       telefono: ['', Validators.required],
     });
+
+    
+  
 
     // Obtener el formulario
     const formulario = document.getElementById('usuarioForm');

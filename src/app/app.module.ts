@@ -12,6 +12,8 @@ import { HomeComponent } from './pages/home/home.component';
 import { SingUpComponent } from './pages/sing-up/sing-up.component';
 import { ModalSelectComponent } from './pages/modal-select/modal-select.component';
 import { SelectPerfilComponent } from './components/select-perfil/select-perfil.component';
+import { LoginComponent } from './components/login/login.component';
+import { SingInComponent } from './pages/sing-in/sing-in.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { SelectPerfilComponent } from './components/select-perfil/select-perfil.
     HomeComponent,
     SingUpComponent,
     ModalSelectComponent,
-    SelectPerfilComponent
+    SelectPerfilComponent,
+    LoginComponent,
+    SingInComponent
   ],
   imports: [
     BrowserModule,

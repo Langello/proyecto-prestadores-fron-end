@@ -41,7 +41,7 @@ export class SelectPerfilComponent implements OnInit {
         metodo_pago: metodoPago
       }).then((response) => {
         console.log(response.data);
-        this.router.navigate(['/home']);
+        this.router.navigate(['/sing-in']);
       }).catch((error) => {
         alert(error.response.data.msg);
         console.log(error);
@@ -68,7 +68,7 @@ export class SelectPerfilComponent implements OnInit {
       })
         .then((response) => {
           console.log(response.data);
-          this.router.navigate(['/home']); //cambiar a pantala de perfil de prestador
+          this.router.navigate(['/sing-in']); //cambiar a pantala de perfil de prestador
         })
         .catch((error) => {
           alert(error.response.data.msg);
