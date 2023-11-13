@@ -2,49 +2,149 @@
     <h1 class="text-center">Registro</h1>
     <div class="row justify-content-center mt-1">
         <div class="col-lg-8 mb-2">
-            <form id="usuarioForm">
-                <div class="">
-                    <div class="col-lg-12">
-                        <div class="mb-3">
-                            <label for="nombre" class="form-label">Nombre</label>
-                            <input type="text" class="form-control" id="nombre" placeholder="Juan">
-                        </div>
-                        <div class="mb-3">
-                            <label for="apellido" class="form-label">Apellido</label>
-                            <input type="text" class="form-control" id="apellido" placeholder="Perez">
-                        </div>
-                        <div class="mb-3">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" placeholder="juan_perez@ejemplo.com">
-                        </div>
-                        <div class="mb-3">
-                            <label for="password" class="form-label">Contraseña</label>
-                            <input type="password" class="form-control" id="password" placeholder="Aabc!123">
+            <form id="usuarioForm" [formGroup]="usuarioForm">
+                <div class="col-lg-12">
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" [ngClass]="{
+                'is-invalid':
+                  usuarioForm.get('nombre')?.errors &&
+                  usuarioForm.get('nombre')?.touched
+              }" id="nombre" placeholder="Juan" formControlName="nombre" />
+                        <div class="text-danger" formControlName="nombre" *ngIf="
+                usuarioForm.get('nombre')?.hasError('required') &&
+                usuarioForm.get('nombre')?.touched
+              ">
+                            <li>Este campo es requerido</li>
                         </div>
                     </div>
-                    <div class="col-lg-12">
-                        <div class="mb-3">
-                            <label for="telefono" class="form-label">Telefono</label>
-                            <input type="text" class="form-control" id="telefono" placeholder="011468466">
+                    <div class="mb-3">
+                        <label for="apellido" class="form-label">Apellido</label>
+                        <input type="text" class="form-control" [ngClass]="{
+                'is-invalid':
+                  usuarioForm.get('apellido')?.errors &&
+                  usuarioForm.get('apellido')?.touched
+              }" id="apellido" placeholder="Perez" formControlName="apellido" />
+                        <div class="text-danger" formControlName="nombre" *ngIf="
+                usuarioForm.get('apellido')?.hasError('required') &&
+                usuarioForm.get('apellido')?.touched
+              ">
+                            <li>Este campo es requerido</li>
                         </div>
-                        <div class="mb-3">
-                            <label for="dni" class="form-label">DNI</label>
-                            <input type="text" class="form-control" id="dni" placeholder="12345678">
-                        </div>
-                        <div class="mb-3">
-                            <label for="tipo-dni" class="form-label">Tipo de DNI</label>
-                            <select class="form-select" id="tipo-dni">
-                                <option value="DNI">DNI</option>
-                                <option value="Pasaporte">Pasaporte</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="fecha-nacimiento" class="form-label">Fecha de Nacimiento</label>
-                            <input type="date" class="form-control" id="fecha-nacimiento" placeholder="YYYY-MM-DD">
-                        </div>
-                        <button type="submit" class="btn btn-success me-2" >Registrarse</button>
-                        <button type="reset" form="usuarioForm" class="btn btn-warning">Borrar</button>
                     </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" [ngClass]="{
+                'is-invalid':
+                  usuarioForm.get('email')?.errors &&
+                  usuarioForm.get('email')?.touched
+              }" class="form-control" id="email" placeholder="juan_perez@ejemplo.com" formControlName="email" />
+                        <div class="text-danger" formControlName="email" *ngIf="
+                usuarioForm.get('email')?.hasError('required') &&
+                usuarioForm.get('email')?.touched
+              ">
+                            <li>Este campo es requerido</li>
+                        </div>
+                        <div class="text-danger" formControlName="email" *ngIf="
+                usuarioForm.get('email')?.hasError('email') &&
+                usuarioForm.get('email')?.touched
+              ">
+                            <li>Email no valido</li>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Contraseña</label>
+                        <input type="password" class="form-control" id="password" placeholder="Aabc!123"
+                            formControlName="password" [ngClass]="{
+                'is-invalid':
+                  usuarioForm.get('password')?.errors &&
+                  usuarioForm.get('password')?.touched
+              }" />
+                        <div class="text-danger" formControlName="password" *ngIf="
+                usuarioForm.get('password')?.hasError('required') &&
+                usuarioForm.get('password')?.touched
+              ">
+                            <li>Este campo es requerido</li>
+                        </div>
+                        <div class="text-danger" formControlName="password" *ngIf="
+                usuarioForm.get('password')?.hasError('pattern') &&
+                usuarioForm.get('password')?.touched
+              ">
+                            <li>
+                                Contraseña no valida (Debe tener almenos una mayuscula, una
+                                minuscula, un numero y un caracter especial)
+                            </li>
+                        </div>
+                        <div class="text-danger" formControlName="password" *ngIf="
+                usuarioForm.get('password')?.hasError('minlength') &&
+                usuarioForm.get('password')?.touched
+              ">
+                            <li>Minimo 8 caracteres</li>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="mb-3">
+                        <label for="telefono" class="form-label">Telefono</label>
+                        <input type="text" class="form-control" id="telefono" placeholder="011468466"
+                            formControlName="telefono" [ngClass]="{
+                'is-invalid':
+                  usuarioForm.get('telefono')?.errors &&
+                  usuarioForm.get('telefono')?.touched
+              }" />
+                        <div class="text-danger" formControlName="telefono" *ngIf="
+                usuarioForm.get('telefono')?.hasError('required') &&
+                usuarioForm.get('telefono')?.touched
+              ">
+                            <li>Este campo es requerido</li>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="dni" class="form-label">DNI</label>
+                        <input type="text" class="form-control" id="dni" placeholder="12345678" formControlName="dni" 
+                            [ngClass]="{ 'is-invalid': usuarioForm.get('dni')?.errors && usuarioForm.get('dni')?.touched }"/>
+                        <div class="text-danger" formControlName="dni" *ngIf="
+                usuarioForm.get('dni')?.hasError('required') &&
+                usuarioForm.get('dni')?.touched
+              ">
+                            <li>Este campo es requerido</li>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="tipo-dni" class="form-label">Tipo de DNI</label>
+                        <select class="form-select" id="tipo-dni" formControlName="tipoDni" [ngClass]="{
+                'is-invalid':
+                  usuarioForm.get('tipoDni')?.errors &&
+                  usuarioForm.get('tipoDni')?.touched
+              }">
+                            <option value="DNI">DNI</option>
+                            <option value="Pasaporte">Pasaporte</option>
+                        </select>
+                        <div class="text-danger" formControlName="tipoDni" *ngIf="
+                usuarioForm.get('tipoDni')?.hasError('required') &&
+                usuarioForm.get('tipoDni')?.touched
+              ">
+                            <li>Este campo es requerido</li>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="fecha-nacimiento" class="form-label">Fecha de Nacimiento</label>
+                        <input type="date" class="form-control" id="fecha-nacimiento" placeholder="YYYY-MM-DD"
+                            formControlName="fechaNacimiento" 
+                            [ngClass]="{ 'is-invalid': usuarioForm.get('fechaNacimiento')?.errors && usuarioForm.get('fechaNacimiento')?.touched }"/>
+                        <div class="text-danger" formControlName="fechaNacimiento" *ngIf="
+                usuarioForm.get('fechaNacimiento')?.hasError('required') &&
+                usuarioForm.get('fechaNacimiento')?.touched
+              ">
+                            <li>Este campo es requerido</li>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-success me-2">
+                        Registrarse
+                    </button>
+                    <button type="reset" form="usuarioForm" class="btn btn-warning">
+                        Borrar
+                    </button>
                 </div>
             </form>
         </div>

@@ -1,5 +1,6 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import axios from 'axios';
 
 
@@ -10,9 +11,25 @@ import axios from 'axios';
 })
 export class SelectPerfilComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router , private fb: FormBuilder) { }
+
+  prestadorForm!: FormGroup;
+  consumidorForm!: FormGroup;
 
   ngOnInit(): void {
+
+    this.prestadorForm = this.fb.group({
+      cuilCuit: ['', Validators.required],
+      descripcion: ['', Validators.required],
+      horarioAtencion: ['', Validators.required],
+      disponibilidad: ['', Validators.required],
+      radioCobertura: ['', Validators.required],
+    })
+
+    this.consumidorForm = this.fb.group({
+      metodoPago: ['', Validators.required],
+    })
+
     const idUsuario = localStorage.getItem('idUsuario');
     const formularioConsumidor = document.getElementById('consumidorForm');
     formularioConsumidor?.addEventListener('submit', (event) => {
@@ -26,6 +43,7 @@ export class SelectPerfilComponent implements OnInit {
         console.log(response.data);
         this.router.navigate(['/home']);
       }).catch((error) => {
+        alert(error.response.data.msg);
         console.log(error);
       });
     })
@@ -53,14 +71,12 @@ export class SelectPerfilComponent implements OnInit {
           this.router.navigate(['/home']); //cambiar a pantala de perfil de prestador
         })
         .catch((error) => {
+          alert(error.response.data.msg);
           console.log(error);
         })
 
     })
   }
 
-  ngOndestroy(): void {
-
-  }
 }
 

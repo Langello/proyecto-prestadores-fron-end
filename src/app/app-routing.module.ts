@@ -9,6 +9,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: '', component: SingUpComponent },
   { path: 'modal-select', component: ModalSelectComponent },
+  { path: '**', redirectTo: '' }
 
 ];
 

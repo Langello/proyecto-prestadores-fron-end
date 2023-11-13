@@ -17,13 +17,18 @@
                     <h1 class="modal-title fs-5" id="exampleModalLabel">Ficha de Consumidor</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form id="consumidorForm">
+                <form id="consumidorForm" [formGroup]="consumidorForm">
                     <div class="modal-body">
 
                         <div class="mb-3">
                             <label for="metodoPago" class="form-label">Método de Pago</label>
                             <input type="text" class="form-control" id="metodoPago"
-                                placeholder="Ingrese su método de pago">
+                                [ngClass]="{ 'is-invalid': consumidorForm.get('metodoPago')?.errors && consumidorForm.get('metodoPago')?.touched }"
+                                placeholder="Ingrese su método de pago" formControlName="metodoPago">
+                            <div class="text-danger" formControlName="metodoPago"
+                                *ngIf="consumidorForm.get('metodoPago')?.hasError('required') && consumidorForm.get('metodoPago')?.touched">
+                                <li>Este campo es requerido</li>
+                            </div>
                         </div>
 
                     </div>
@@ -43,17 +48,28 @@
                     <h1 class="modal-title fs-5" id="exampleModalLabel">Ficha de Prestador</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form id="prestadorForm">
+                <form id="prestadorForm" [formGroup]="prestadorForm">
                     <div class="modal-body">
 
                         <div class="mb-3">
                             <label for="cuilCuit" class="form-label">CUIL/CUIT</label>
-                            <input type="text" class="form-control" id="cuilCuit" placeholder="Ingrese su CUIL/CUIT">
+                            <input type="text" class="form-control" id="cuilCuit" placeholder="Ingrese su CUIL/CUIT"
+                                formControlName="cuilCuit"
+                                [ngClass]="{ 'is-invalid': prestadorForm.get('cuilCuit')?.errors && prestadorForm.get('cuilCuit')?.touched }">
+                            <div class="text-danger" formControlName="cuilCuit"
+                                *ngIf="prestadorForm.get('cuilCuit')?.hasError('required') && prestadorForm.get('cuilCuit')?.touched">
+                                <li>Este campo es requerido</li>
+                            </div>
                         </div>
                         <div class="mb-3">
                             <label for="descripcion" class="form-label">Descripción del Prestador</label>
-                            <textarea class="form-control" id="descripcion" rows="3"
+                            <textarea class="form-control" id="descripcion" rows="3" formControlName="descripcion"
+                                [ngClass]="{ 'is-invalid': prestadorForm.get('descripcion')?.errors && prestadorForm.get('descripcion')?.touched }"
                                 placeholder="Ingrese la descripción del prestador"></textarea>
+                            <div class="text-danger" formControlName="descripcion"
+                                *ngIf="prestadorForm.get('descripcion')?.hasError('required') && prestadorForm.get('descripcion')?.touched">
+                                <li>Este campo es requerido</li>
+                            </div>
                         </div>
                         <div class="mb-3">
                             <label for="fotosTrabajos" class="form-label">Fotos de Trabajos Realizados</label>
@@ -62,19 +78,36 @@
                         <div class="mb-3">
                             <label for="horariosAtencion" class="form-label">Horarios de Atención</label>
                             <input type="text" class="form-control" id="horariosAtencion"
+                                formControlName="horarioAtencion"
+                                [ngClass]="{ 'is-invalid': prestadorForm.get('horarioAtencion')?.errors && prestadorForm.get('horarioAtencion')?.touched }"
                                 placeholder="Ingrese los horarios de atención">
+                            <div class="text-danger" formControlName="horariosAtencion"
+                                *ngIf="prestadorForm.get('horarioAtencion')?.hasError('required') && prestadorForm.get('horarioAtencion')?.touched">
+                                <li>Este campo es requerido</li>
+                            </div>
                         </div>
                         <div class="mb-3">
                             <label for="disponibilidad" class="form-label">Disponibilidad</label>
-                            <select class="form-select" id="disponibilidad">
+                            <select class="form-select" id="disponibilidad" formControlName="disponibilidad" 
+                                [ngClass]="{ 'is-invalid': prestadorForm.get('disponibilidad')?.errors && prestadorForm.get('disponibilidad')?.touched }">
                                 <option value="true">Disponible</option>
                                 <option value="false">No disponible</option>
                             </select>
+                            <div class="text-danger" formControlName="disponibilidad"
+                                *ngIf="prestadorForm.get('disponibilidad')?.hasError('required') && prestadorForm.get('disponibilidad')?.touched">
+                                <li>Este campo es requerido</li>
+                            </div>
                         </div>
                         <div class="mb-3">
                             <label for="radioCobertura" class="form-label">Radio de Cobertura</label>
                             <input type="text" class="form-control" id="radioCobertura"
+                                formControlName="radioCobertura"
+                                [ngClass]="{ 'is-invalid': prestadorForm.get('radioCobertura')?.errors && prestadorForm.get('radioCobertura')?.touched }"
                                 placeholder="Ingrese el radio de cobertura">
+                            <div class="text-danger" formControlName="radioCobertura"
+                                *ngIf="prestadorForm.get('radioCobertura')?.hasError('required') && prestadorForm.get('radioCobertura')?.touched">
+                                <li>Este campo es requerido</li>
+                            </div>
                         </div>
 
                     </div>

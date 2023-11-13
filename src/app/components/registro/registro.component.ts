@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import axios from 'axios';
-
-
-
 
 @Component({
   selector: 'app-registro',
@@ -11,10 +9,22 @@ import axios from 'axios';
   styleUrls: ['./registro.component.css'],
 })
 export class RegistroComponent implements OnInit {
+  usuarioForm!: FormGroup; 
 
-  constructor(private router : Router) {}
+  constructor(private fb: FormBuilder, private router: Router) {}
 
   ngOnInit(): void {
+    this.usuarioForm = this.fb.group({
+      nombre: ['', Validators.required],
+      apellido: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.pattern('^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\w\s]).+$'), Validators.minLength(8)]],
+      dni: ['', Validators.required],
+      tipoDni: ['', Validators.required],
+      fechaNacimiento: ['', Validators.required],
+      telefono: ['', Validators.required],
+    });
+
     // Obtener el formulario
     const formulario = document.getElementById('usuarioForm');
 
@@ -38,8 +48,8 @@ export class RegistroComponent implements OnInit {
       const fechaNacimiento = (
         document.getElementById('fecha-nacimiento') as HTMLInputElement
       ).value;
-      const telefono = (document.getElementById('telefono') as HTMLInputElement
-      ).value;
+      const telefono = (document.getElementById('telefono') as HTMLInputElement)
+        .value;
 
       // Enviar los datos al servidor
       axios
@@ -59,9 +69,9 @@ export class RegistroComponent implements OnInit {
           const idUsuario = response.data.id;
           localStorage.setItem('idUsuario', idUsuario);
           this.registrar();
-          ;
         })
         .catch((error) => {
+          alert('Error al registrar el usuario: ' + error.response.data.msg);
           console.log(error);
         });
     });
