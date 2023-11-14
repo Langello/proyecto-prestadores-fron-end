@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import axios from 'axios';
+import { IPrestador } from 'src/app/models/prestador';
+import { ApiService } from 'src/app/services/api.service';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-profesionales',
@@ -7,21 +10,24 @@ import axios from 'axios';
   styleUrls: ['./profesionales.component.css']
 })
 export class ProfesionalesComponent implements OnInit {
-  data: any;
+  listaPrestadores: IPrestador[] = [];
+  loading: boolean = true;
 
-  ngOnInit() {
-    this.getPrestadores();
+  constructor(private _apiService: ApiService , private _router: Router) { }
+
+  ngOnInit(): void {
+    this._apiService.getPrestadores().subscribe({
+      next: (data: IPrestador[]) => {
+        this.listaPrestadores = data;
+        this.loading = false;
+      },
+      error: (error: any) => {
+        console.error(error);
+        this.loading = false;
+      }
+    });
+    
   }
 
-  getPrestadores() {
-    axios
-      .get('http://localhost:3050/prestador')
-      .then(response => {
-        this.data = response.data;
-        console.log(this.data);
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  }
+  
 }

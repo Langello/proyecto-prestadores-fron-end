@@ -2,11 +2,11 @@
     <div class="container">
 
         <div class="row justify-content-center">
-            <div *ngFor="let item of data" class="card" style="width: 19rem; margin: 10px; padding: 10px">
+            <div *ngFor="let item of listaPrestadores" class="card" style="width: 19rem; margin: 10px; padding: 10px">
                 <img src="https://gasista.net.ar/wp-content/uploads/2022/09/gasista-plomero-matriculado-crucecita-1-1024x683.jpeg"
                     class="card-img-top" alt="...">
                 <div class="card-body">
-                    <h5 class="card-title">{{item.usuario.nombre}}</h5>
+                    <h5 class="card-title">{{item.usuario.nombre}} {{item.usuario.apellido}}</h5>
                     <p class="card-text">{{item.descripcion}}</p>
                 </div>
                 <ul class="list-group list-group-flush">

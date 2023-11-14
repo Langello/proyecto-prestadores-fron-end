@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import axios from 'axios';
+import { ApiService } from 'src/app/services/api.service';
+import { IUsuario } from 'src/app/models/usuario';
+
 
 @Component({
   selector: 'app-registro',
@@ -12,7 +14,11 @@ export class RegistroComponent implements OnInit {
   usuarioForm!: FormGroup;
   showPassword: boolean = false;
 
-  constructor(private fb: FormBuilder, private router: Router) {}
+  constructor(
+    private fb: FormBuilder,
+    private _router: Router,
+    private _apiService: ApiService
+    ) {}
 
   togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
@@ -31,7 +37,7 @@ export class RegistroComponent implements OnInit {
       nombre: ['', Validators.required],
       apellido: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.pattern('^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\w\s]).+$'), Validators.minLength(8)]],
+      password: ['', [Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]).{8,}$/)]],
       dni: ['', Validators.required],
       tipoDni: ['', Validators.required],
       fechaNacimiento: ['', Validators.required],
@@ -68,32 +74,33 @@ export class RegistroComponent implements OnInit {
         .value;
 
       // Enviar los datos al servidor
-      axios
-        .post('http://localhost:3050/usuario', {
+      
+      this._apiService
+        .postUsuario({
           nombre: nombre,
           apellido: apellido,
           email: email,
           password: password,
           dni: dni,
-          telefono: telefono,
           tipo_dni: tipoDni,
-          foto_perfil: '',
           fecha_nacimiento: fechaNacimiento,
+          telefono: telefono,
+          foto_perfil: '',
         })
-        .then((response) => {
-          console.log(response.data);
-          const idUsuario = response.data.id;
-          localStorage.setItem('idUsuario', idUsuario);
-          this.registrar();
-        })
-        .catch((error) => {
-          alert('Error al registrar el usuario: ' + error.response.data.msg);
-          console.log(error);
+        .subscribe({
+          next: (data: IUsuario) => {
+            console.log(data);
+            this._router.navigate(['/modal-select']);
+          },
+          error: (error: any) => {
+            console.error(error);
+            alert(error.error.msg);
+          },
         });
     });
   }
 
   registrar() {
-    this.router.navigate(['/modal-select']);
+    this._router.navigate(['/modal-select']);
   }
 }

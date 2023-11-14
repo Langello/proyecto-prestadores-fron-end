@@ -14,6 +14,7 @@ import { ModalSelectComponent } from './pages/modal-select/modal-select.componen
 import { SelectPerfilComponent } from './components/select-perfil/select-perfil.component';
 import { LoginComponent } from './components/login/login.component';
 import { SingInComponent } from './pages/sing-in/sing-in.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { SingInComponent } from './pages/sing-in/sing-in.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

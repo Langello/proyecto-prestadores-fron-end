@@ -11,7 +11,7 @@ const routes: Routes = [
   { path: 'sing-up', component: SingUpComponent },
   { path: 'modal-select', component: ModalSelectComponent },
   { path: 'sing-in', component: SingInComponent },
-  { path: '**', redirectTo: '' }
+  { path: '**', redirectTo: 'sing-up' }
 
 ];
 

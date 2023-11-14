@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import axios from 'axios';
+import { ApiService } from 'src/app/services/api.service';
+import { IToken } from 'src/app/models/token';
+
 
 @Component({
   selector: 'app-login',
@@ -13,7 +15,7 @@ export class LoginComponent implements OnInit {
   showPassword: boolean = false;
   
 
-  constructor(private router: Router , private fb: FormBuilder) { }
+  constructor(private router: Router , private fb: FormBuilder, private _apiService: ApiService) { }
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
@@ -38,21 +40,18 @@ export class LoginComponent implements OnInit {
     const email = this.loginForm.get('email')?.value;
     const password = this.loginForm.get('password')?.value;
 
-    
-
-    axios.post('http://localhost:3050/login', {
-      email: email,
-      password: password
-    })
-      .then((response) => {
-        console.log(response.data);
-        localStorage.setItem('token', response.data.token);
+    this._apiService.login(email, password).subscribe({
+      next: (data: IToken) => {
+        localStorage.setItem('token', data.token);
         this.router.navigate(['/home']);
-      })
-      .catch((error) => {
-        alert(error.response.data.msg);
-        console.log(error);
-      });
+      },
+      error: (error: any) => {
+        alert(error.error.msg);
+        console.error(error);
+      }
+    })
+
+    
   }
 
 }
