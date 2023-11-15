@@ -2,16 +2,16 @@
     <div class="container">
 
         <div class="row justify-content-center">
-            <div *ngFor="let item of listaPrestadores" class="card" style="width: 19rem; margin: 10px; padding: 10px">
+            <div *ngFor="let item of listaPrestadores" class="card">
                 <img src="https://gasista.net.ar/wp-content/uploads/2022/09/gasista-plomero-matriculado-crucecita-1-1024x683.jpeg"
-                    class="card-img-top" alt="...">
+                    class="card-img-top" alt="imagen del profesional">
                 <div class="card-body">
-                    <h5 class="card-title">{{item.usuario.nombre}} {{item.usuario.apellido}}</h5>
+                    <h5 class="card-title">{{item.usuario?.nombre}} {{item.usuario?.apellido}}</h5>
                     <p class="card-text">{{item.descripcion}}</p>
                 </div>
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">{{item.horarios_atencion}}</li>
-                    <li class="list-group-item">Telefono: {{item.usuario.telefono}}</li>
+                    <li class="list-group-item">Telefono: {{item.usuario?.telefono}}</li>
                     <li class="list-group-item text-success" *ngIf="item.disponibilidad">Disponible</li>
                     <li class="list-group-item text-danger" *ngIf="!item.disponibilidad">No disponible</li>
                 </ul>
