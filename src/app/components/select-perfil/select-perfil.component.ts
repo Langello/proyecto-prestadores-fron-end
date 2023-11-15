@@ -23,11 +23,11 @@ export class SelectPerfilComponent implements OnInit {
   ngOnInit(): void {
 
     this.prestadorForm = this.fb.group({
-      cuilCuit: ['', Validators.required],
-      descripcion: ['', Validators.required],
-      horarioAtencion: ['', Validators.required],
-      disponibilidad: ['', Validators.required],
-      radioCobertura: ['', Validators.required],
+      cuilCuit:         ['', Validators.required],
+      descripcion:      ['', Validators.required],
+      horarioAtencion:  ['', Validators.required],
+      disponibilidad:   ['', Validators.required],
+      radioCobertura:   ['', Validators.required],
     })
 
     this.consumidorForm = this.fb.group({
@@ -44,7 +44,7 @@ export class SelectPerfilComponent implements OnInit {
       const metodoPago = (document.getElementById('metodoPago') as HTMLSelectElement).value;
 
 
-      this._apiService.postConsumidor({ metodo_pago: metodoPago, usuario: null }, idUsuario).subscribe({
+      this._apiService.postConsumidor({ metodoPago: metodoPago, usuario: null }, idUsuario).subscribe({
         next: (data: IConsumidor) => {
           this.router.navigate(['/home']);
         }
@@ -58,14 +58,14 @@ export class SelectPerfilComponent implements OnInit {
     const formularioPrestador = document.getElementById('prestadorForm');
     formularioPrestador?.addEventListener('submit', (event) => {
       event.preventDefault();
-      const cuil_cuit = (document.getElementById('cuilCuit') as HTMLInputElement).value;
+      const cuilCuit = (document.getElementById('cuilCuit') as HTMLInputElement).value;
       const descripcion = (document.getElementById('descripcion') as HTMLTextAreaElement).value;
-      const fotos_trabajos_realizados = (document.getElementById('fotosTrabajos') as HTMLInputElement).value;
-      const horarios_atencion = (document.getElementById('horariosAtencion') as HTMLInputElement).value;
+      const fotosTrabajosRealizados = (document.getElementById('fotosTrabajos') as HTMLInputElement).value;
+      const horariosAtencion = (document.getElementById('horariosAtencion') as HTMLInputElement).value;
       const disponibilidad = Boolean((document.getElementById('disponibilidad') as HTMLInputElement).value);
-      const radio_cobertura = (document.getElementById('radioCobertura') as HTMLInputElement).value;
+      const radioCobertura = (document.getElementById('radioCobertura') as HTMLInputElement).value;
 
-      this._apiService.postPrestador({ cuil_cuit, descripcion, fotos_trabajos_realizados, horarios_atencion, disponibilidad, radio_cobertura, usuario: null }, idUsuario).subscribe({
+      this._apiService.postPrestador({ cuilCuit, descripcion, fotosTrabajosRealizados, horariosAtencion, disponibilidad, radioCobertura, usuario: null }, idUsuario).subscribe({
         next: (data: IPrestador) => {
           this.router.navigate(['/home']);
         }

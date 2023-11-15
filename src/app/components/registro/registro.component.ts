@@ -77,19 +77,21 @@ export class RegistroComponent implements OnInit {
       
       this._apiService
         .postUsuario({
+          id: '',
           nombre: nombre,
           apellido: apellido,
           email: email,
           password: password,
           dni: dni,
-          tipo_dni: tipoDni,
-          fecha_nacimiento: fechaNacimiento,
+          tipoDni: tipoDni,
+          fechaNacimiento: fechaNacimiento,
           telefono: telefono,
-          foto_perfil: '',
+          fotoPerfil: '',
         })
         .subscribe({
           next: (data: IUsuario) => {
             console.log(data);
+            localStorage.setItem('idUsuario', data.id);
             this._router.navigate(['/modal-select']);
           },
           error: (error: any) => {

@@ -10,7 +10,7 @@
                     <p class="card-text">{{item.descripcion}}</p>
                 </div>
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item">{{item.horarios_atencion}}</li>
+                    <li class="list-group-item">{{item.horariosAtencion}}</li>
                     <li class="list-group-item">Telefono: {{item.usuario?.telefono}}</li>
                     <li class="list-group-item text-success" *ngIf="item.disponibilidad">Disponible</li>
                     <li class="list-group-item text-danger" *ngIf="!item.disponibilidad">No disponible</li>
