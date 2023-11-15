@@ -4,6 +4,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { SingUpComponent } from './pages/sing-up/sing-up.component';
 import { ModalSelectComponent } from './pages/modal-select/modal-select.component';
 import { SingInComponent } from './pages/sing-in/sing-in.component';
+import { PrestadoresComponent } from './pages/prestadores/prestadores.component';
 
 
 const routes: Routes = [
@@ -11,7 +12,8 @@ const routes: Routes = [
   { path: 'sing-up', component: SingUpComponent },
   { path: 'modal-select', component: ModalSelectComponent },
   { path: 'sing-in', component: SingInComponent },
-  { path: '**', redirectTo: 'sing-up' }
+  { path: 'prestadores', component: PrestadoresComponent },
+  { path: '**', redirectTo: 'home' }
 
 ];
 

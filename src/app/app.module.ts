@@ -15,6 +15,8 @@ import { SelectPerfilComponent } from './components/select-perfil/select-perfil.
 import { LoginComponent } from './components/login/login.component';
 import { SingInComponent } from './pages/sing-in/sing-in.component';
 import { HttpClientModule } from '@angular/common/http';
+import { PrestadoresComponent } from './pages/prestadores/prestadores.component';
+import { BienvenidaComponent } from './components/bienvenida/bienvenida.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,9 @@ import { HttpClientModule } from '@angular/common/http';
     ModalSelectComponent,
     SelectPerfilComponent,
     LoginComponent,
-    SingInComponent
+    SingInComponent,
+    PrestadoresComponent,
+    BienvenidaComponent
   ],
   imports: [
     BrowserModule,

@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit {
     this._apiService.login(email, password).subscribe({
       next: (data: IToken) => {
         localStorage.setItem('token', data.token);
-        this.router.navigate(['/home']);
+        this.router.navigate(['/prestadores']);
       },
       error: (error: any) => {
         alert(error.error.msg);

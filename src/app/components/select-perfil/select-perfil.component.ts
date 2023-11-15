@@ -46,7 +46,7 @@ export class SelectPerfilComponent implements OnInit {
 
       this._apiService.postConsumidor({ metodoPago: metodoPago, usuario: null }, idUsuario).subscribe({
         next: (data: IConsumidor) => {
-          this.router.navigate(['/home']);
+          this.router.navigate(['/prestadores']);
         }
         , error: (error: any) => {
           alert(error.error.msg);
@@ -67,7 +67,7 @@ export class SelectPerfilComponent implements OnInit {
 
       this._apiService.postPrestador({ cuilCuit, descripcion, fotosTrabajosRealizados, horariosAtencion, disponibilidad, radioCobertura, usuario: null }, idUsuario).subscribe({
         next: (data: IPrestador) => {
-          this.router.navigate(['/home']);
+          this.router.navigate(['/prestadores']);
         }
         , error: (error: any) => {
           alert(error.error.msg);
