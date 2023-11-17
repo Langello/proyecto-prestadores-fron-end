@@ -17,6 +17,8 @@ import { SingInComponent } from './pages/sing-in/sing-in.component';
 import { HttpClientModule } from '@angular/common/http';
 import { PrestadoresComponent } from './pages/prestadores/prestadores.component';
 import { BienvenidaComponent } from './components/bienvenida/bienvenida.component';
+import { ProfesionalDetalleComponent } from './components/profesional-detalle/profesional-detalle.component';
+import { PrestadoresDetailComponent } from './pages/prestadores-detail/prestadores-detail.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,9 @@ import { BienvenidaComponent } from './components/bienvenida/bienvenida.componen
     LoginComponent,
     SingInComponent,
     PrestadoresComponent,
-    BienvenidaComponent
+    BienvenidaComponent,
+    ProfesionalDetalleComponent,
+    PrestadoresDetailComponent
   ],
   imports: [
     BrowserModule,

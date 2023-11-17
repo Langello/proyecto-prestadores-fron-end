@@ -20,7 +20,7 @@ export class ApiService {
     return this._httpClient.get<IPrestador[]>(`${this.urlBase}/prestador`);
   }
 
-  public getPrestador(id: number): Observable<IPrestador> {
+  public getPrestador(id: string): Observable<IPrestador> {
     return this._httpClient.get<IPrestador>(`${this.urlBase}/prestador/${id}`);
   }
 

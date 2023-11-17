@@ -7,6 +7,7 @@ export interface IPrestador {
     disponibilidad:             boolean;
     radioCobertura:             string;
     usuario:                    IUsuario | null;
+    id:                         string;
 }
 
 

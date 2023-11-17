@@ -1,0 +1,45 @@
+<div class="container">
+    <div class="row">
+        <div class="col-6 offset-3 text-center">
+            <h2>
+                {{ prestador.usuario?.nombre }} {{ prestador.usuario?.apellido }}
+            </h2>
+            <button class="btn"
+                [ngClass]="{ 'btn-outline-success': prestador.disponibilidad, 'btn-outline-danger ': !prestador.disponibilidad }">
+                {{ prestador.disponibilidad ? 'Disponible' : 'Ocupado' }}
+            </button>
+            <button type="button" *ngIf="prestador.disponibilidad" class="btn btn-warning m-2">Contratar</button>
+
+        </div>
+        <div class="col-8 offset-2">
+            <p>{{ prestador.descripcion }}</p>
+            <div class="d-flex justify-content-around">
+                <p>Teléfono: {{ prestador.usuario?.telefono }}</p>
+                <p>Email: {{ prestador.usuario?.email }}</p>
+            </div>
+        </div>
+        <div id="carouselExampleAutoplaying" class="carousel slide col-10 offset-1" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="{{ prestador.fotosTrabajosRealizados }}" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="{{ prestador.fotosTrabajosRealizados }}" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="{{ prestador.fotosTrabajosRealizados }}" class="d-block w-100" alt="...">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+</div>

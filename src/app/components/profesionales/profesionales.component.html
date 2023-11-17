@@ -7,11 +7,12 @@
     <div class="container">
         <div class="row justify-content-center">
             <div *ngFor="let item of listaPrestadores" class="card">
-                <img src="https://gasista.net.ar/wp-content/uploads/2022/09/gasista-plomero-matriculado-crucecita-1-1024x683.jpeg"
+                <a class="text-decoration-none" href="/prestador/{{item.id}}">
+                <img src="{{item.fotosTrabajosRealizados}}"
                     class="card-img-top" alt="imagen del profesional">
                 <div class="card-body">
-                    <h5 class="card-title">{{item.usuario?.nombre}} {{item.usuario?.apellido}}</h5>
-                    <p class="card-text">{{item.descripcion}}</p>
+                    <h5 class="card-title text-dark">{{item.usuario?.nombre}} {{item.usuario?.apellido}}</h5>
+                    <p class="card-text text-dark">{{item.descripcion}}</p>
                 </div>
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">{{item.horariosAtencion}}</li>
@@ -19,10 +20,9 @@
                     <li class="list-group-item text-success" *ngIf="item.disponibilidad">Disponible</li>
                     <li class="list-group-item text-danger" *ngIf="!item.disponibilidad">No disponible</li>
                 </ul>
-                <div class="card-body">
-                    <button href="#" class="btn btn-warning ">Contratar</button>
-                </div>
+            </a>
             </div>
         </div>
     </div>
+
 </div>

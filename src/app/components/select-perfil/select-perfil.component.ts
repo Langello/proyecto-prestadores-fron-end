@@ -92,7 +92,7 @@ export class SelectPerfilComponent implements OnInit {
       const disponibilidad = Boolean((document.getElementById('disponibilidad') as HTMLInputElement).value);
       const radioCobertura = (document.getElementById('radioCobertura') as HTMLInputElement).value;
 
-      this._apiService.postPrestador({ cuilCuit, descripcion, fotosTrabajosRealizados, horariosAtencion, disponibilidad, radioCobertura, usuario: null }, idUsuario).subscribe({
+      this._apiService.postPrestador({ cuilCuit, descripcion, fotosTrabajosRealizados, horariosAtencion, disponibilidad, radioCobertura, usuario: null, id: '' }, idUsuario).subscribe({
         next: (data: IPrestador) => {
           this.loading = false;
           const modal = document.getElementById('prestadorModal');
