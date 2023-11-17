@@ -13,12 +13,13 @@ import { IUsuario } from 'src/app/models/usuario';
 export class RegistroComponent implements OnInit {
   usuarioForm!: FormGroup;
   showPassword: boolean = false;
+  loading: boolean = false;
 
   constructor(
     private fb: FormBuilder,
     private _router: Router,
     private _apiService: ApiService
-    ) {}
+  ) { }
 
   togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
@@ -44,8 +45,8 @@ export class RegistroComponent implements OnInit {
       telefono: ['', Validators.required],
     });
 
-    
-  
+
+
 
     // Obtener el formulario
     const formulario = document.getElementById('usuarioForm');
@@ -54,6 +55,8 @@ export class RegistroComponent implements OnInit {
     formulario?.addEventListener('submit', (event) => {
       // Prevenir el comportamiento predeterminado de envío del formulario
       event.preventDefault();
+
+      this.loading = true;
 
       // Obtener los valores de los campos del formulario
       const nombre = (document.getElementById('nombre') as HTMLInputElement)
@@ -74,7 +77,7 @@ export class RegistroComponent implements OnInit {
         .value;
 
       // Enviar los datos al servidor
-      
+
       this._apiService
         .postUsuario({
           id: '',
@@ -95,8 +98,17 @@ export class RegistroComponent implements OnInit {
             this._router.navigate(['/modal-select']);
           },
           error: (error: any) => {
+            const alertElement = document.createElement('div');
+            alertElement.className = 'alert alert-warning';
+            alertElement.innerText = error.error.msg;
+            document.getElementById('usuarioForm')?.prepend(alertElement);
+            scrollTo(0, 0);
             console.error(error);
-            alert(error.error.msg);
+            this.loading = false;
+
+            setTimeout(() => {
+              alertElement.remove();
+            }, 4000);
           },
         });
     });

@@ -1,16 +1,17 @@
 <h1 class="text-center mt-5">¿Que tipo de perfil eres?</h1>
 <div class="container">
     <div id="botones" class="d-flex justify-content-center align-items-center mt-5 mb-5">
-        <button type="button" class="btn btn-success me-5 btn-lg" data-bs-toggle="modal"
+        <button type="button" class="btn btn-warning me-5 btn-lg text-dark" data-bs-toggle="modal"
             data-bs-target="#consumidorModal">
             Soy Consumidor
         </button>
-        <button type="button" class="btn btn-warning btn-lg" data-bs-toggle="modal" data-bs-target="#prestadorModal">
+        <button type="button" class="btn btn-outline-dark btn-lg" data-bs-toggle="modal" data-bs-target="#prestadorModal" data-bs-dismiss="modal">
             Soy Prestador
         </button>
     </div>
 
-    <div class="modal fade" id="consumidorModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="consumidorModal" data-bs-backdrop="static" tabindex="-1"
+        aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -33,15 +34,21 @@
 
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Confirmar</button>
+                        <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal" data-bs-target="#consumidorModal" >Cerrar</button>
+                        <button type="submit" class="btn btn-warning" [disabled]="consumidorForm.invalid" data-bs-target="#consumidorModal">
+                            <div *ngIf="!loading" class="text-black">Confirmar</div>
+                            <div *ngIf="loading" class="spinner-border text-black align-middle"
+                                style="width: 1.5rem; height: 1.5rem; font-size: 0.7rem;" aria-hidden="true">
+                            </div>
+                        </button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 
-    <div class="modal fade" id="prestadorModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="prestadorModal" data-bs-backdrop="static" tabindex="-1"
+        aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -88,7 +95,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="disponibilidad" class="form-label">Disponibilidad</label>
-                            <select class="form-select" id="disponibilidad" formControlName="disponibilidad" 
+                            <select class="form-select" id="disponibilidad" formControlName="disponibilidad"
                                 [ngClass]="{ 'is-invalid': prestadorForm.get('disponibilidad')?.errors && prestadorForm.get('disponibilidad')?.touched }">
                                 <option value="true">Disponible</option>
                                 <option value="false">No disponible</option>
@@ -98,10 +105,9 @@
                                 <li>Este campo es requerido</li>
                             </div>
                         </div>
-                        <div class="mb-3">
+                        <div>
                             <label for="radioCobertura" class="form-label">Radio de Cobertura</label>
-                            <input type="text" class="form-control" id="radioCobertura"
-                                formControlName="radioCobertura"
+                            <input type="text" class="form-control" id="radioCobertura" formControlName="radioCobertura"
                                 [ngClass]="{ 'is-invalid': prestadorForm.get('radioCobertura')?.errors && prestadorForm.get('radioCobertura')?.touched }"
                                 placeholder="Ingrese el radio de cobertura">
                             <div class="text-danger" formControlName="radioCobertura"
@@ -112,8 +118,13 @@
 
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Confirmar</button>
+                        <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-warning " [disabled]="!prestadorForm.valid">
+                            <div *ngIf="!loading" class="text-black">Confirmar</div>
+                            <div *ngIf="loading" class="spinner-border text-black align-middle"
+                                style="width: 1.5rem; height: 1.5rem; font-size: 0.7rem;" aria-hidden="true">
+                            </div>
+                        </button>
                     </div>
                 </form>
             </div>

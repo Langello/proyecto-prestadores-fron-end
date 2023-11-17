@@ -13,13 +13,15 @@ import { IToken } from 'src/app/models/token';
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
   showPassword: boolean = false;
-  
+  loading: boolean = false;
 
-  constructor(private router: Router , private fb: FormBuilder, private _apiService: ApiService) { }
+
+
+  constructor(private router: Router, private fb: FormBuilder, private _apiService: ApiService) { }
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
-      email: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email],],
       password: ['', Validators.required],
     })
   }
@@ -37,6 +39,7 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
+    this.loading = true;
     const email = this.loginForm.get('email')?.value;
     const password = this.loginForm.get('password')?.value;
 
@@ -44,14 +47,19 @@ export class LoginComponent implements OnInit {
       next: (data: IToken) => {
         localStorage.setItem('token', data.token);
         this.router.navigate(['/prestadores']);
+        this.loading = false;
       },
       error: (error: any) => {
-        alert(error.error.msg);
+        const alertElement = document.createElement('div');
+        alertElement.className = 'alert alert-warning';
+        alertElement.innerText = error.error.msg;
+        document.getElementById('loginForm')?.prepend(alertElement);
         console.error(error);
+        this.loading = false;
+        setTimeout(() => {
+          alertElement.remove();
+        }, 4000);
       }
     })
-
-    
   }
-
 }
