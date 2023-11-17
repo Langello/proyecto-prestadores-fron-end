@@ -49,12 +49,14 @@
                         <li>Este campo es requerido</li>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-warning my-3">
-                    <div *ngIf="!loading" class="text-black">Iniciar Sesion</div>
+                <div class="d-flex justify-content-center">
+                <button type="submit" class="btn btn-warning my-3" [disabled]="loginForm.invalid">
+                    <div *ngIf="!loading" class="text-black" >Iniciar Sesion</div>
                     <div *ngIf="loading" class="spinner-border text-black align-middle" style="width: 1.5rem; height: 1.5rem; font-size: 0.7rem;"
                         aria-hidden="true">
                     </div>
                 </button>
+            </div>
                 <div class="text-center mt-3">
                     <span>¿No tienes cuenta? <a [routerLink]="['/sing-up']" class="text-black">Registrate</a></span>
                 </div>
