@@ -49,14 +49,10 @@ export class ProfesionalesComponent implements OnInit {
         error: (error: any) => {
           const alertElement = document.createElement('div');
           alertElement.className = 'alert alert-warning container text-center fs-5';
-          alertElement.innerText = "No hay prestadores registrados";
+          alertElement.innerText = "No se encontraron resultados";
           document.body.appendChild(alertElement);
           console.error(error);
-          this.loading = false;
-          setTimeout(() => {
-            alertElement.remove();
-          }, 4000);
-          
+          this.loading = false;          
         }
       });
     }

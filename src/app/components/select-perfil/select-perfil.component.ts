@@ -50,7 +50,7 @@ export class SelectPerfilComponent implements OnInit {
       const metodoPago = (document.getElementById('metodoPago') as HTMLSelectElement).value;
 
 
-      this._apiService.postConsumidor({ metodoPago: metodoPago, usuario: null }, idUsuario).subscribe({
+      this._apiService.postConsumidor({ metodoPago: metodoPago, usuario: null, id: '' }, idUsuario).subscribe({
         next: (data: IConsumidor) => {
           this.loading = false;
           const modal = document.getElementById('consumidorModal');

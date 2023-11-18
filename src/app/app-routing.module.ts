@@ -6,7 +6,7 @@ import { ModalSelectComponent } from './pages/modal-select/modal-select.componen
 import { SingInComponent } from './pages/sing-in/sing-in.component';
 import { PrestadoresComponent } from './pages/prestadores/prestadores.component';
 import { PrestadoresDetailComponent } from './pages/prestadores-detail/prestadores-detail.component';
-
+import { ContractComponent } from './pages/contract/contract.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -15,6 +15,7 @@ const routes: Routes = [
   { path: 'sing-in', component: SingInComponent },
   { path: 'prestadores', component: PrestadoresComponent },
   { path: 'prestador/:id', component: PrestadoresDetailComponent },
+  { path: 'contract/:id', component: ContractComponent },
   { path: '**', redirectTo: 'home' },
 
 ];

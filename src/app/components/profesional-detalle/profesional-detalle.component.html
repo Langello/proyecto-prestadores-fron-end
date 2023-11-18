@@ -13,15 +13,11 @@
                 [ngClass]="{ 'btn-outline-success': prestador.disponibilidad, 'btn-outline-danger ': !prestador.disponibilidad }">
                 {{ prestador.disponibilidad ? 'Disponible' : 'Ocupado' }}
             </button>
-            <button type="button" *ngIf="prestador.disponibilidad" class="btn btn-warning m-2">Contratar</button>
+            <button type="button" *ngIf="prestador.disponibilidad" routerLink="/contract/{{ prestador.id }}" class="btn btn-warning m-2">Contratar</button>
 
         </div>
         <div class="col-8 offset-2">
             <p>{{ prestador.descripcion }}</p>
-            <div class="d-flex justify-content-around">
-                <p>Teléfono: {{ prestador.usuario?.telefono }}</p>
-                <p>Email: {{ prestador.usuario?.email }}</p>
-            </div>
         </div>
         <div id="carouselExampleAutoplaying" class="carousel slide col-10 offset-1" data-bs-ride="carousel">
             <div class="carousel-inner">

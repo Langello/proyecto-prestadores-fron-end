@@ -19,6 +19,8 @@ import { PrestadoresComponent } from './pages/prestadores/prestadores.component'
 import { BienvenidaComponent } from './components/bienvenida/bienvenida.component';
 import { ProfesionalDetalleComponent } from './components/profesional-detalle/profesional-detalle.component';
 import { PrestadoresDetailComponent } from './pages/prestadores-detail/prestadores-detail.component';
+import { ContratarComponent } from './components/contratar/contratar.component';
+import { ContractComponent } from './pages/contract/contract.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,9 @@ import { PrestadoresDetailComponent } from './pages/prestadores-detail/prestador
     PrestadoresComponent,
     BienvenidaComponent,
     ProfesionalDetalleComponent,
-    PrestadoresDetailComponent
+    PrestadoresDetailComponent,
+    ContratarComponent,
+    ContractComponent
   ],
   imports: [
     BrowserModule,

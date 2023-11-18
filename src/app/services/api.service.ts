@@ -26,7 +26,7 @@ export class ApiService {
     return this._httpClient.get<IPrestador>(`${this.urlBase}/prestador/${id}`);
   }
 
-  public getConsumidor(id: number): Observable<IConsumidor> {
+  public getConsumidor(id: string): Observable<IConsumidor> {
     return this._httpClient.get<IConsumidor>(`${this.urlBase}/consumidor/${id}`);
   }
 
@@ -48,6 +48,10 @@ export class ApiService {
 
   public postConsumidor(consumidor: IConsumidor, id: string): Observable<IConsumidor> {
     return this._httpClient.post<IConsumidor>(`${this.urlBase}/consumidor/${id}`, consumidor);
+  }
+
+  public postMensaje(asunto: string, mensaje: string, idDestino: string, token: string): Observable<any> {
+    return this._httpClient.post<any>(`${this.urlBase}/mensaje`, { asunto, mensaje, idDestino, token });
   }
 
 }
