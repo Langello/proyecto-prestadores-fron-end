@@ -4,6 +4,8 @@ import { ApiService } from 'src/app/services/api.service';
 import { Router } from '@angular/router';
 
 
+
+
 @Component({
   selector: 'app-profesionales',
   templateUrl: './profesionales.component.html',
@@ -16,7 +18,7 @@ export class ProfesionalesComponent implements OnInit {
   constructor(private _apiService: ApiService, private _router: Router) { }
 
   ngOnInit(): void {
-    this._apiService.getPrestadores().subscribe({
+    this._apiService.getPrestadores("").subscribe({
       next: (data: IPrestador[]) => {
         this.listaPrestadores = data;
         this.loading = false;
@@ -35,6 +37,30 @@ export class ProfesionalesComponent implements OnInit {
       }
     });
 
+  this._apiService.textObserved.subscribe({
+    next: (text: string) => {
+      this.loading = true;
+      this._apiService.getPrestadores(text).subscribe({
+        next: (data: IPrestador[]) => {
+          console.log(data);
+          this.listaPrestadores = data;
+          this.loading = false;
+        },
+        error: (error: any) => {
+          const alertElement = document.createElement('div');
+          alertElement.className = 'alert alert-warning container text-center fs-5';
+          alertElement.innerText = "No hay prestadores registrados";
+          document.body.appendChild(alertElement);
+          console.error(error);
+          this.loading = false;
+          setTimeout(() => {
+            alertElement.remove();
+          }, 4000);
+          
+        }
+      });
+    }
+  })
   }
 
 

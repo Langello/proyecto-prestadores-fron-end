@@ -4,13 +4,12 @@
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <form class="d-flex align-items-center col-lg-10 offset-lg-2" method="POST" action="#">
+        <div class="d-flex align-items-center col-lg-10 offset-lg-2">
             <span class="me-2">Busca&nbsp;tu&nbsp;profesional&nbsp;ideal:</span>
             <div class="col-lg-6 me-2">
-                <input class=" form-control me-2" type="text" name="query" placeholder="Gasista, electricista..."
-                    title="Enter search keyword">
+                <input id="query" (keyup.enter)="search()"  class=" form-control me-2" type="text" name="query" placeholder="Gasista, electricista...">
             </div>
-            <button class="btn btn-outline-dark" type="button">Buscar</button>
-        </form>
+            <button class="btn btn-outline-dark" type="button" (click)="search()">Buscar</button>
+        </div>
     </div>
 </nav>

@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-import axios from 'axios';
+import { Component, ElementRef } from '@angular/core';
+import { ApiService } from 'src/app/services/api.service';
+
 
 @Component({
   selector: 'app-search',
@@ -7,6 +8,24 @@ import axios from 'axios';
   styleUrls: ['./search.component.css']
 })
 export class SearchComponent {
+  query: string = '';
   
 
+  constructor(
+    private queryElement: ElementRef,
+    private _apiService: ApiService,
+    
+  ) {
+    
+  }
+
+  onSearchTextEntered(searchValue: string) {
+    this.query = searchValue;
+  }
+  search() {
+  this.query = this.queryElement.nativeElement.querySelector("#query").value;
+  this._apiService.textObserved.next(this.query);
+  }
 }
+
+

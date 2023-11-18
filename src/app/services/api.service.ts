@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { IUsuario } from '../models/usuario';
 import { IToken } from '../models/token';
 import { IConsumidor } from '../models/consumidor';
+import { Subject } from 'rxjs';
 
 
 @Injectable({
@@ -13,11 +14,12 @@ import { IConsumidor } from '../models/consumidor';
 export class ApiService {
 
   private urlBase = 'https://7csx60ms-3050.brs.devtunnels.ms';
+  public textObserved: Subject<string> = new Subject<string>();
   
   constructor(private _httpClient: HttpClient) { }
 
-  public getPrestadores(): Observable<IPrestador[]> {
-    return this._httpClient.get<IPrestador[]>(`${this.urlBase}/prestador`);
+  public getPrestadores(filtro?: string): Observable<IPrestador[]> {
+    return this._httpClient.get<IPrestador[]>(`${this.urlBase}/prestador?filtro=${filtro}`);
   }
 
   public getPrestador(id: string): Observable<IPrestador> {
