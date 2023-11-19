@@ -1,5 +1,13 @@
 <nav class="navbar bg-body-tertiary">
-  <div class="container-fluid justify-content-center">
+  <div class="container">
+    <a class="btn btn-outline-warning text-dark" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button"
+      aria-controls="offcanvasExample">
+      <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-list"
+        viewBox="0 0 16 16">
+        <path fill-rule="evenodd"
+          d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
+      </svg>
+    </a>
     <a class="navbar-brand" routerLink="/home">
       <img src="https://icongr.am/material/hammer.svg?size=148&color=c0822a" alt="Logo" width="44" height="40"
         class="d-inline-block align-text-center">
@@ -7,3 +15,63 @@
     </a>
   </div>
 </nav>
+
+
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasExampleLabel">Menu</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <div class="list-group list-group-flush">
+
+
+      <button type="button" class="btn btn-warning text-start text-dark list-group-item" routerLinkActive="ruta-activa"
+        routerLink="/home">Home</button>
+
+
+      <button *ngIf="cuenta" type="button" class="btn btn-warning text-start text-dark list-group-item" routerLinkActive="ruta-activa"
+        routerLink="/cuenta">
+        Cuenta
+      </button>
+
+      <button *ngIf="perfilConsumidor" type="button" class="btn btn-warning text-start text-dark list-group-item" routerLinkActive="ruta-activa"
+        >
+        Mi perfil de consumidor
+      </button>
+
+
+      <button *ngIf="perfilPrestador" type="button" class="btn btn-warning text-start text-dark list-group-item" routerLinkActive="ruta-activa"
+        >
+        Mi perfil de prestador
+      </button>
+
+
+      <button *ngIf="listaPrestadores" type="button" class="btn btn-warning text-start text-dark list-group-item" routerLinkActive="ruta-activa"
+        routerLink="/prestadores">Lista de
+        prestadores</button>
+
+
+      <button *ngIf="listaTrabajos" type="button" class="btn btn-warning text-start text-dark list-group-item"
+        routerLinkActive="ruta-activa">Lista de trabajos</button>
+
+
+
+      <button  type="button" class="btn btn-warning text-start text-dark list-group-item"
+        routerLinkActive="ruta-activa">Ayuda</button>
+
+
+      <button *ngIf="cerrarSesion" type="button" class="btn btn-warning text-start text-dark list-group-item"
+        routerLinkActive="ruta-activa" (click)="logout()">Cerrar sesión</button>
+
+
+      <button *ngIf="registrarse" type="button" class="btn btn-warning text-start text-dark list-group-item"
+        routerLinkActive="ruta-activa" routerLink="/sing-up">Registrarse</button>
+
+
+      <button *ngIf="iniciarSesion" type="button" class="btn btn-warning text-start text-dark list-group-item" routerLinkActive="ruta-activa"
+        routerLink="/sing-in">Iniciar sesión</button>
+
+    </div>
+  </div>
+</div>

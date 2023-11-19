@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { IUsuario } from '../models/usuario';
 import { IToken } from '../models/token';
 import { IConsumidor } from '../models/consumidor';
+
 import { Subject } from 'rxjs';
 
 
@@ -50,8 +51,13 @@ export class ApiService {
     return this._httpClient.post<IConsumidor>(`${this.urlBase}/consumidor/${id}`, consumidor);
   }
 
-  public postMensaje(asunto: string, mensaje: string, idDestino: string, token: string): Observable<any> {
-    return this._httpClient.post<any>(`${this.urlBase}/mensaje`, { asunto, mensaje, idDestino, token });
+  public postMensajeAPrestador(asunto: string, mensaje: string, idDestino: string, token: string ): Observable<any> {
+    return this._httpClient.post<any>(`${this.urlBase}/mensaje-a-prestador`, { asunto, mensaje, idDestino, token});
   }
 
+  public getRoles(token: IToken): Observable<any> {
+    return this._httpClient.post<any>(`${this.urlBase}/roles`, token);
+  }
+
+  
 }

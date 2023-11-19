@@ -29,13 +29,13 @@
                 <div class="modal" id="modalExito" tabindex="-1">
                     <div class="modal-dialog modal-dialog-centered modal-sm modal-static d-flex justify-content-center align-items-center">
                         <div class="modal-content text-center">
-                            <div *ngIf="loading" class="spinner-border text-black m-auto" style="font-size: 0.7rem;"
+                            <div *ngIf="loading" class="spinner-border text-black m-auto mt-2" style="font-size: 0.7rem;"
                                 aria-hidden="true"></div>
                             <div *ngIf="!loading" class="modal-body">
                                 {{textModal}}
                             </div>
                             <div class="text-center">
-                                <button type="button" class="btn btn-outline-warning m-2" data-bs-dismiss="modal"
+                                <button type="button" [ngClass]="{'d-none': loading}" class="btn btn-outline-warning text-dark m-2" data-bs-dismiss="modal"
                                     routerLink="/prestadores">Aceptar</button>
                             </div>
                         </div>
