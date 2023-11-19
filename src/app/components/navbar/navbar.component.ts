@@ -80,4 +80,8 @@ export class NavbarComponent implements OnInit {
     localStorage.removeItem('token');
     this._router.navigate(['/sing-in']);
   }
+
+  prestadoresPage() {
+    this._router.navigate(['/prestadores']);
+  }
 }

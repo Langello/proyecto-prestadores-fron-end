@@ -5,9 +5,10 @@
 </div>
 <div *ngIf="!loading" class="bg-body-tertiary">
     <div class="container">
+        <h1 class="text-center">Prestadores de Servicios</h1>
         <div class="row justify-content-center">
             <div *ngFor="let item of listaPrestadores" class="card">
-                <a class="text-decoration-none" href="/prestador/{{item.id}}">
+                <a class="text-decoration-none" routerLink="/prestador/{{item.id}}">
                 <img src="{{item.fotosTrabajosRealizados}}"
                     class="card-img-top" alt="imagen del profesional">
                 <div class="card-body">

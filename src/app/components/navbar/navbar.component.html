@@ -30,35 +30,31 @@
         routerLink="/home">Home</button>
 
 
-      <button *ngIf="cuenta" type="button" class="btn btn-warning text-start text-dark list-group-item" routerLinkActive="ruta-activa"
-        routerLink="/cuenta">
+      <button *ngIf="cuenta" type="button" class="btn btn-warning text-start text-dark list-group-item"
+        routerLinkActive="ruta-activa">
         Cuenta
       </button>
 
-      <button *ngIf="perfilConsumidor" type="button" class="btn btn-warning text-start text-dark list-group-item" routerLinkActive="ruta-activa"
-        >
+      <button *ngIf="perfilConsumidor" type="button" class="btn btn-warning text-start text-dark list-group-item"
+        routerLinkActive="ruta-activa">
         Mi perfil de consumidor
       </button>
 
 
-      <button *ngIf="perfilPrestador" type="button" class="btn btn-warning text-start text-dark list-group-item" routerLinkActive="ruta-activa"
-        >
+      <button *ngIf="perfilPrestador" type="button" class="btn btn-warning text-start text-dark list-group-item"
+        routerLinkActive="ruta-activa">
         Mi perfil de prestador
       </button>
 
 
-      <button *ngIf="listaPrestadores" type="button" class="btn btn-warning text-start text-dark list-group-item" routerLinkActive="ruta-activa"
-        routerLink="/prestadores">Lista de
+      <button *ngIf="listaPrestadores" type="button" class="btn btn-warning text-start text-dark list-group-item"
+        routerLinkActive="ruta-activa" (click) = "prestadoresPage()">Lista de
         prestadores</button>
 
 
       <button *ngIf="listaTrabajos" type="button" class="btn btn-warning text-start text-dark list-group-item"
         routerLinkActive="ruta-activa">Lista de trabajos</button>
 
-
-
-      <button  type="button" class="btn btn-warning text-start text-dark list-group-item"
-        routerLinkActive="ruta-activa">Ayuda</button>
 
 
       <button *ngIf="cerrarSesion" type="button" class="btn btn-warning text-start text-dark list-group-item"
@@ -69,8 +65,13 @@
         routerLinkActive="ruta-activa" routerLink="/sing-up">Registrarse</button>
 
 
-      <button *ngIf="iniciarSesion" type="button" class="btn btn-warning text-start text-dark list-group-item" routerLinkActive="ruta-activa"
-        routerLink="/sing-in">Iniciar sesión</button>
+      <button *ngIf="iniciarSesion" type="button" class="btn btn-warning text-start text-dark list-group-item"
+        routerLinkActive="ruta-activa" routerLink="/sing-in">Iniciar sesión</button>
+
+
+      <button type="button" class="btn btn-warning text-start text-dark list-group-item"
+        routerLinkActive="ruta-activa">Ayuda</button>
+
 
     </div>
   </div>

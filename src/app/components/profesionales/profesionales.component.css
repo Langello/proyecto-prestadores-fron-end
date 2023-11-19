@@ -1,11 +1,11 @@
-.card{
-    font-size: 12px;
-    width: 15rem;
-    margin: 5px;
-    padding-top: 10px;
+.card {
+  font-size: 12px;
+  width: 15rem;
+  margin: 5px;
+  padding-top: 10px;
 }
-.card:hover{
-    transform: scale(1.2);
-    transition: 0.4s;
-    z-index: 5;
+.card:hover {
+  transform: scale(1.15);
+  transition: 0.4s;
+  z-index: 5;
 }

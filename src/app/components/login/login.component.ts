@@ -46,8 +46,8 @@ export class LoginComponent implements OnInit {
     this._apiService.login(email, password).subscribe({
       next: (data: IToken) => {
         localStorage.setItem('token', data.token);
-        this.router.navigate(['/prestadores']);
         this.loading = false;
+        this.router.navigate(['/prestadores']);
       },
       error: (error: any) => {
         const alertElement = document.createElement('div');

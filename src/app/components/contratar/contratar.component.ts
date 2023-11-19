@@ -41,9 +41,9 @@ export class ContratarComponent implements OnInit {
       },
       error: (error: any) => {
         console.error(error);
+        this.textModal = error.error.msg;
         this.loading = false;
       }
     });
   }
-
 }
