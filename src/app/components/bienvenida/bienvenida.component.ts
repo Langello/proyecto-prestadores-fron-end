@@ -1,10 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-bienvenida',
   templateUrl: './bienvenida.component.html',
   styleUrls: ['./bienvenida.component.css']
 })
-export class BienvenidaComponent {
+export class BienvenidaComponent implements OnInit {
 
+  constructor() { }
+
+  ngOnInit(): void {
+    document.body.style.overflowY = 'scroll';
+  }
 }

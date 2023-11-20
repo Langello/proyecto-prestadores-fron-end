@@ -92,7 +92,7 @@ export class RegistroComponent implements OnInit {
           fotoPerfil: '',
         })
         .subscribe({
-          next: (data: IToken) => {
+          next: (data: any) => {
             localStorage.setItem('token', data.token);
             this._router.navigate(['/modal-select']);
             this.loading = false;

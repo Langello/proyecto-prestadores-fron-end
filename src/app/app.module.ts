@@ -29,6 +29,8 @@ import { PostularComponent } from './components/postular/postular.component';
 import { PostulateComponent } from './pages/postulate/postulate.component';
 import { CuentaComponent } from './pages/cuenta/cuenta.component';
 import { AccountComponent } from './components/account/account.component';
+import { HelpComponent } from './components/help/help.component';
+import { AyudaComponent } from './pages/ayuda/ayuda.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +59,9 @@ import { AccountComponent } from './components/account/account.component';
     PostularComponent,
     PostulateComponent,
     CuentaComponent,
-    AccountComponent
+    AccountComponent,
+    HelpComponent,
+    AyudaComponent
   ],
   imports: [
     BrowserModule,

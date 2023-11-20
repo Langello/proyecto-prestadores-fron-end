@@ -40,6 +40,10 @@ export class ApiService {
     return this._httpClient.post<IToken>(`${this.urlBase}/usuario`, usuario);
   }
 
+  public putUsuario(token: string, usuario: IUsuario): Observable<any> {
+    return this._httpClient.put<any>(`${this.urlBase}/usuario`, { ...usuario, token });
+  }
+
   public login(email: string, password: string): Observable<IToken> {
     return this._httpClient.post<IToken>(`${this.urlBase}/login`, { email, password });
   }

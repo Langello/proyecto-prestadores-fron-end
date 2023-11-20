@@ -1,0 +1,11 @@
+/* Estilos personalizados para los botones del acordeón */
+.accordion-button {
+    outline: none; /* Elimina el borde azul al enfocar el botón */
+    box-shadow: none; /* Elimina cualquier sombra alrededor del botón */
+  }
+  
+  /* Estilos para el botón del acordeón cuando está activo */
+  .accordion-button:not(.collapsed) {
+    background-color: #ffca2c4a; /* Cambia el color de fondo cuando el botón está activo */
+  }
+  

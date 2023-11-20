@@ -21,6 +21,8 @@ export class AccountComponent  implements OnInit {
   loading: boolean = true;
   usuario!: IUsuario;
   token!: IToken;
+  loading1: boolean = false;
+  
 
   constructor(
     private fb: FormBuilder,
@@ -71,7 +73,41 @@ export class AccountComponent  implements OnInit {
   }
 
 
-  onSubmit() {
+  guardar() {
+
+    
+    this.loading = true;
+
+    const token = localStorage.getItem('token');
+
+    if (!token) {
+      this._router.navigate(['/login']);
+      return;
+    }
+
+    this._apiService.putUsuario(token, this.usuarioForm.value).subscribe({
+      next: (data) => {
+        const alertElement = document.createElement('div');
+        alertElement.classList.add('alert', 'alert-success', 'container', 'text-center', 'fs-5', 'mt-1', 'mx-auto', 'w-50');
+        alertElement.innerText = data.msg;
+        document.getElementById('title')?.appendChild(alertElement);
+        setTimeout(() => {
+          alertElement.remove();
+        } , 4000);
+        this.loading = false;
+      },
+      error: (error) => {
+        const alertElement = document.createElement('div');
+        alertElement.classList.add('alert', 'alert-warning');
+        alertElement.innerText = error.error.msg;
+        document.getElementById('usuarioForm')?.prepend(alertElement);
+
+        setTimeout(() => {
+          alertElement.remove();
+        } , 4000);
+        this.loading = false;
+      }
+    })
     
   }
 

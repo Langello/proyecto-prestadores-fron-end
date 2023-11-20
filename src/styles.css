@@ -1,4 +1,23 @@
 body {
-    margin-bottom: 3rem !important; /* Footer height */
-    background-color: #F8F9FA !important; /* Fallback color */
+  margin-bottom: 3rem !important; /* Footer height */
+  background-color: #f8f9fa !important; /* Fallback color */
+}
+/* Estilos personalizados para quitar el borde azul al enfocar y cambiar a borde amarillo al hacer clic */
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none !important; /* Elimina el borde azul al enfocar */
+  box-shadow: none !important; /* Elimina cualquier sombra alrededor del input */
+}
+
+/* Borde amarillo al hacer clic */
+input:focus,
+textarea:focus,
+select:focus {
+  border: 1px solid #ffca2c !important; /* Cambia el color del borde al hacer clic */
+}
+
+/* Estilos para modificar el fondo del input en autocompletado */
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px #ffca2c4a inset !important; /* Cambia el color de fondo del autocompletado */
 }

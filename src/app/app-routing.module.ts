@@ -11,6 +11,7 @@ import { TrabajosComponent } from './pages/trabajos/trabajos.component';
 import { TrabajosDatailComponent } from './pages/trabajos-datail/trabajos-datail.component';
 import { PostulateComponent } from './pages/postulate/postulate.component';
 import { CuentaComponent } from './pages/cuenta/cuenta.component';
+import { AyudaComponent } from './pages/ayuda/ayuda.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -24,6 +25,7 @@ const routes: Routes = [
   { path: 'trabajo/:id', component: TrabajosDatailComponent },
   { path: 'postulate/:id', component: PostulateComponent },
   { path: 'account', component: CuentaComponent },
+  { path: 'help', component: AyudaComponent },
   { path: '**', redirectTo: 'home' },
 
 ];
