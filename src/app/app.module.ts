@@ -27,6 +27,8 @@ import { JobsComponent } from './components/jobs/jobs.component';
 import { JobDetalleComponent } from './components/job-detalle/job-detalle.component';
 import { PostularComponent } from './components/postular/postular.component';
 import { PostulateComponent } from './pages/postulate/postulate.component';
+import { CuentaComponent } from './pages/cuenta/cuenta.component';
+import { AccountComponent } from './components/account/account.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +55,9 @@ import { PostulateComponent } from './pages/postulate/postulate.component';
     JobsComponent,
     JobDetalleComponent,
     PostularComponent,
-    PostulateComponent
+    PostulateComponent,
+    CuentaComponent,
+    AccountComponent
   ],
   imports: [
     BrowserModule,

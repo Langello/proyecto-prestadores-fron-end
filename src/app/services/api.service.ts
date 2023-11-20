@@ -17,7 +17,7 @@ export class ApiService {
 
   private urlBase = 'https://7csx60ms-3050.brs.devtunnels.ms';
   public textObserved: Subject<string> = new Subject<string>();
-  
+
   constructor(private _httpClient: HttpClient) { }
 
   public getPrestadores(filtro?: string): Observable<IPrestador[]> {
@@ -32,32 +32,31 @@ export class ApiService {
     return this._httpClient.get<IConsumidor>(`${this.urlBase}/consumidor/${id}`);
   }
 
-  public getUsuario(id: string | null): Observable<IUsuario> {
-    return this._httpClient.get<IUsuario>(`${this.urlBase}/usuario/${id}`);
+  public getUsuario(token: string): Observable<IUsuario> {
+    return this._httpClient.get<IUsuario>(`${this.urlBase}/usuario/${token}`);
   }
 
-  public postUsuario(usuario: IUsuario): Observable<IUsuario> {
-    return this._httpClient.post<IUsuario>(`${this.urlBase}/usuario`, usuario);
+  public postUsuario(usuario: IUsuario): Observable<IToken> {
+    return this._httpClient.post<IToken>(`${this.urlBase}/usuario`, usuario);
   }
 
   public login(email: string, password: string): Observable<IToken> {
     return this._httpClient.post<IToken>(`${this.urlBase}/login`, { email, password });
   }
 
-  public postPrestador(prestador: IPrestador, id: string): Observable<IPrestador> {
-    return this._httpClient.post<IPrestador>(`${this.urlBase}/prestador/${id}`, prestador);
+  public postPrestador(prestador: IPrestador, token: string): Observable<IPrestador> {
+    return this._httpClient.post<IPrestador>(`${this.urlBase}/prestador`, { ...prestador, token });
   }
 
-  public postConsumidor(consumidor: IConsumidor, id: string): Observable<IConsumidor> {
-    return this._httpClient.post<IConsumidor>(`${this.urlBase}/consumidor/${id}`, consumidor);
+  public postConsumidor(consumidor: IConsumidor, token: any): Observable<IConsumidor> {
+    return this._httpClient.post<IConsumidor>(`${this.urlBase}/consumidor`, { ...consumidor, token });
+  }
+  public postMensajeAPrestador(asunto: string, mensaje: string, idDestino: string, token: string): Observable<any> {
+    return this._httpClient.post<any>(`${this.urlBase}/mensaje-a-prestador`, { asunto, mensaje, idDestino, token });
   }
 
-  public postMensajeAPrestador(asunto: string, mensaje: string, idDestino: string, token: string ): Observable<any> {
-    return this._httpClient.post<any>(`${this.urlBase}/mensaje-a-prestador`, { asunto, mensaje, idDestino, token});
-  }
-
-  public postMensajeAConsumidor(asunto: string, mensaje: string, idDestino: string, token: string ): Observable<any> {
-    return this._httpClient.post<any>(`${this.urlBase}/mensaje-a-consumidor`, { asunto, mensaje, idDestino, token});
+  public postMensajeAConsumidor(asunto: string, mensaje: string, idDestino: string, token: string): Observable<any> {
+    return this._httpClient.post<any>(`${this.urlBase}/mensaje-a-consumidor`, { asunto, mensaje, idDestino, token });
   }
 
   public getRoles(token: IToken): Observable<any> {
@@ -72,5 +71,5 @@ export class ApiService {
     return this._httpClient.get<ITrabajo>(`${this.urlBase}/trabajo/${id}`);
   }
 
-  
+
 }

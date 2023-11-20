@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ApiService } from 'src/app/services/api.service';
-import { IUsuario } from 'src/app/models/usuario';
+import { IToken } from 'src/app/models/token';
 
 
 @Component({
@@ -92,10 +92,10 @@ export class RegistroComponent implements OnInit {
           fotoPerfil: '',
         })
         .subscribe({
-          next: (data: IUsuario) => {
-            console.log(data);
-            localStorage.setItem('idUsuario', data.id);
+          next: (data: IToken) => {
+            localStorage.setItem('token', data.token);
             this._router.navigate(['/modal-select']);
+            this.loading = false;
           },
           error: (error: any) => {
             const alertElement = document.createElement('div');
@@ -112,9 +112,5 @@ export class RegistroComponent implements OnInit {
           },
         });
     });
-  }
-
-  registrar() {
-    this._router.navigate(['/modal-select']);
   }
 }

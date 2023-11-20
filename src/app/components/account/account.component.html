@@ -1,0 +1,224 @@
+<div class="bg-body-tertiary">
+    <div class="container">
+        <h1 class="text-center">Mi cuenta</h1>
+
+        <div *ngIf="loading" class="d-flex justify-content-center">
+            <div class="spinner-border text-warning" style="width: 4rem; height: 4rem; margin: 5rem ;"
+                aria-hidden="true">
+            </div>
+        </div>
+        <div *ngIf="!loading" class="row justify-content-center mt-1">
+            <div class="col-lg-6 mb-2">
+                <form id="usuarioForm" [formGroup]="usuarioForm" *ngIf="!loading">
+                    <div class="col-lg-12">
+
+                        <div class="mb-3">
+
+                            <div class="d-flex justify-content-center">
+                                <label for="nombre" class="form-label m-auto me-2">Nombre:</label>
+                                <input type="text" class="form-control" [ngClass]="{
+                                    'is-invalid':
+                                    usuarioForm.get('nombre')?.errors &&
+                                    usuarioForm.get('nombre')?.touched
+                                }" id="nombre" formControlName="nombre" />
+                            </div>
+
+
+                            <div class="text-danger text-center" formControlName="nombre" *ngIf="
+                                usuarioForm.get('nombre')?.hasError('required') &&
+                                usuarioForm.get('nombre')?.touched
+                                ">
+                                <li>Este campo es requerido</li>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <div class="d-flex justify-content-center">
+                                <label for="apellido" class="form-label m-auto me-2">Apellido:</label>
+                                <input type="text" class="form-control" [ngClass]="{
+                                    'is-invalid':
+                                    usuarioForm.get('apellido')?.errors &&
+                                    usuarioForm.get('apellido')?.touched
+                                    }" id="apellido" formControlName="apellido" value="{{usuario.apellido}}" />
+                            </div>
+
+                            <div class="text-danger text-center" formControlName="nombre" *ngIf="
+                                    usuarioForm.get('apellido')?.hasError('required') &&
+                                    usuarioForm.get('apellido')?.touched
+                                    ">
+
+                                <li>Este campo es requerido</li>
+
+                            </div>
+
+                        </div>
+
+                        <div class="mb-3">
+                            <div class="d-flex justify-content-center">
+                                <label for="email" class="form-label m-auto me-2">Email:</label>
+                                <input type="email" [ngClass]="{
+                                    'is-invalid':
+                                    usuarioForm.get('email')?.errors &&
+                                    usuarioForm.get('email')?.touched
+                                }" class="form-control" id="email" placeholder="juan_perez@ejemplo.com"
+                                    formControlName="email" />
+                            </div>
+
+                            <div class="text-danger text-center" formControlName="email" *ngIf="
+                                    usuarioForm.get('email')?.hasError('required') &&
+                                    usuarioForm.get('email')?.touched
+                                ">
+                                <li>Este campo es requerido</li>
+                            </div>
+                            <div class="text-danger text-center" formControlName="email" *ngIf="
+                                        usuarioForm.get('email')?.hasError('email') &&
+                                        usuarioForm.get('email')?.touched
+                                    ">
+                                <li>Email no valido</li>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="form-group my-2">
+                                <div class="d-flex justify-content-center">
+                                    <label class="form-label me-2 m-auto" for="password">Contraseña:</label>
+                                    <div class="input-group">
+                                        <input type="password" class="form-control" formControlName="password"
+                                            id="password" placeholder="Ingrese su contraseña" [ngClass]="{
+                                                'is-invalid':
+                                                usuarioForm.get('password')?.errors &&
+                                                usuarioForm.get('password')?.touched
+                                                }" />
+                                    </div>
+                                    <div class="input-group-text" (click)="togglePasswordVisibility()"
+                                        style="cursor: pointer">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16"
+                                            *ngIf="!showPassword">
+                                            <path
+                                                d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z" />
+                                            <path
+                                                d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" />
+                                        </svg>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-eye-slash" viewBox="0 0 16 16"
+                                            *ngIf="showPassword">
+                                            <path
+                                                d="M13.359 11.238C15.06 9.72 16 8 16 8s-3-5.5-8-5.5a7.028 7.028 0 0 0-2.79.588l.77.771A5.944 5.944 0 0 1 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.134 13.134 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755-.165.165-.337.328-.517.486l.708.709z" />
+                                            <path
+                                                d="M11.297 9.176a3.5 3.5 0 0 0-4.474-4.474l.823.823a2.5 2.5 0 0 1 2.829 2.829l.822.822zm-2.943 1.299.822.822a3.5 3.5 0 0 1-4.474-4.474l.823.823a2.5 2.5 0 0 0 2.829 2.829z" />
+                                            <path
+                                                d="M3.35 5.47c-.18.16-.353.322-.518.487A13.134 13.134 0 0 0 1.172 8l.195.288c.335.48.83 1.12 1.465 1.755C4.121 11.332 5.881 12.5 8 12.5c.716 0 1.39-.133 2.02-.36l.77.772A7.029 7.029 0 0 1 8 13.5C3 13.5 0 8 0 8s.939-1.721 2.641-3.238l.708.709zm10.296 8.884-12-12 .708-.708 12 12-.708.708z" />
+                                        </svg>
+                                        <i class="bi bi-eye" *ngIf="!showPassword"></i>
+                                    </div>
+                                </div>
+                                <div class="text-danger text-center" formControlName="password" *ngIf="
+                                        usuarioForm.get('password')?.hasError('required') &&
+                                        usuarioForm.get('password')?.touched
+                                    ">
+                                    <li>Este campo es requerido</li>
+                                </div>
+                                <div class="text-danger" formControlName="password" *ngIf="
+                                        usuarioForm.get('password')?.hasError('pattern') &&
+                                        usuarioForm.get('password')?.touched
+                                    ">
+                                    <ul class="list-unstyled d-flex justify-content-between">
+                                        <li>● 8 caracteres mínimos</li>
+                                        <li>● 1 número</li>
+                                        <li>● 1 caracter especial</li>
+                                        <li>● 1 mayuscula</li>
+                                        <li>● 1 minuscula</li>
+                                    </ul>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-center ">
+                            <label for="telefono" class="form-label me-2 m-auto">Telefono:</label>
+                            <input type="text" class="form-control" id="telefono" placeholder="011468466"
+                                formControlName="telefono" [ngClass]="{
+                                    'is-invalid':
+                                    usuarioForm.get('telefono')?.errors &&
+                                    usuarioForm.get('telefono')?.touched
+                                }" />
+                        </div>
+                        <div class="text-danger text-center" formControlName="telefono" *ngIf="
+                                    usuarioForm.get('telefono')?.hasError('required') &&
+                                    usuarioForm.get('telefono')?.touched
+                                ">
+                            <li>Este campo es requerido</li>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-center ">
+                            <label for="dni" class="form-label  me-2 m-auto">DNI:</label>
+                            <input type="text" class="form-control" id="dni" placeholder="12345678"
+                                formControlName="dni" [ngClass]="{
+                                    'is-invalid':
+                                    usuarioForm.get('dni')?.errors &&
+                                    usuarioForm.get('dni')?.touched
+                                }" />
+                        </div>
+                        <div class="text-danger text-center" formControlName="dni" *ngIf="
+                                    usuarioForm.get('dni')?.hasError('required') &&
+                                    usuarioForm.get('dni')?.touched
+                                ">
+                            <li>Este campo es requerido</li>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-center ">
+                            <label for="tipo-dni" class="form-label me-2 m-auto">Tipo&nbsp;de&nbsp;documento:</label>
+                            <select class="form-select" id="tipo-dni" formControlName="tipoDni" [ngClass]="{
+                                    'is-invalid':
+                                    usuarioForm.get('tipoDni')?.errors &&
+                                    usuarioForm.get('tipoDni')?.touched
+                                }">
+                                <option value="DNI">DNI</option>
+                                <option value="Pasaporte">Pasaporte</option>
+                            </select>
+                        </div>
+                        <div class="text-danger text-center" formControlName="tipoDni" *ngIf="
+                                    usuarioForm.get('tipoDni')?.hasError('required') &&
+                                    usuarioForm.get('tipoDni')?.touched
+                                ">
+                            <li>Este campo es requerido</li>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-center">
+                            <label for="fecha-nacimiento"
+                                class="form-label me-2 m-auto">Fecha&nbsp;de&nbsp;Nacimiento:</label>
+                            <input type="date" class="form-control" id="fecha-nacimiento" placeholder="YYYY-MM-DD"
+                                formControlName="fechaNacimiento" [ngClass]="{
+                                    'is-invalid':
+                                    usuarioForm.get('fechaNacimiento')?.errors &&
+                                    usuarioForm.get('fechaNacimiento')?.touched
+                                }" />
+                        </div>
+                        <div class="text-danger" formControlName="fechaNacimiento" *ngIf="
+                                    usuarioForm.get('fechaNacimiento')?.hasError('required') &&
+                                    usuarioForm.get('fechaNacimiento')?.touched
+                                ">
+                            <li>Este campo es requerido</li>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <button type="submit" class="btn btn-warning me-2 fs-4" [disabled]="!usuarioForm.valid">
+                            <div *ngIf="!loading">
+                                Guardar
+                            </div>
+                            <div *ngIf="loading" class="spinner-border text-black align-middle"
+                                style="width: 1.5rem; height: 1.5rem; font-size: 0.7rem;" aria-hidden="true">
+                            </div>
+                        </button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+    <div>
