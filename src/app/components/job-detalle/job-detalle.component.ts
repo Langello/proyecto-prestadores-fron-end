@@ -1,26 +1,30 @@
+
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
-import { IPrestador } from 'src/app/models/prestador';
+import { ITrabajo } from 'src/app/models/trabajo';
 
 @Component({
-  selector: 'app-profesional-detalle',
-  templateUrl: './profesional-detalle.component.html',
-  styleUrls: ['./profesional-detalle.component.css']
+  selector: 'app-job-detalle',
+  templateUrl: './job-detalle.component.html',
+  styleUrls: ['./job-detalle.component.css']
 })
-export class ProfesionalDetalleComponent implements OnInit {
+
+export class JobDetalleComponent implements OnInit {
 
 
   loading: boolean = false;
   id: string = '';
-  prestador: IPrestador = {
-    cuilCuit: '',
-    descripcion: '',
-    fotosTrabajosRealizados: '',
-    horariosAtencion: '',
-    disponibilidad: false,
-    radioCobertura: '',
-    usuario: null,
-    id: ''
+  trabajo: ITrabajo = {
+    id: '',
+    nombre: '',
+    fecha: '',
+    lugar: '',
+    rangoHorario: '',
+    prestadorId: null,
+    consumidorId: 0,
+    tareas: '',
+    estadoId: null,
+    calificacionId: null
   }
 
   constructor(
@@ -30,9 +34,9 @@ export class ProfesionalDetalleComponent implements OnInit {
   ngOnInit(): void {
     this.loading = true;
     this.id = window.location.pathname.split('/')[2];
-    this._apiService.getPrestador(this.id).subscribe({
-      next: (data: IPrestador) => {
-        this.prestador = data;
+    this._apiService.getTrabajo(this.id).subscribe({
+      next: (data: ITrabajo) => {
+        this.trabajo = data;
         this.loading = false;
       },
       error: (error: any) => {

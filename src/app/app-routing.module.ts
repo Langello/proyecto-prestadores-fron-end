@@ -7,6 +7,9 @@ import { SingInComponent } from './pages/sing-in/sing-in.component';
 import { PrestadoresComponent } from './pages/prestadores/prestadores.component';
 import { PrestadoresDetailComponent } from './pages/prestadores-detail/prestadores-detail.component';
 import { ContractComponent } from './pages/contract/contract.component';
+import { TrabajosComponent } from './pages/trabajos/trabajos.component';
+import { TrabajosDatailComponent } from './pages/trabajos-datail/trabajos-datail.component';
+import { PostulateComponent } from './pages/postulate/postulate.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -16,6 +19,9 @@ const routes: Routes = [
   { path: 'prestadores', component: PrestadoresComponent },
   { path: 'prestador/:id', component: PrestadoresDetailComponent },
   { path: 'contract/:id', component: ContractComponent },
+  { path: 'trabajos', component: TrabajosComponent },
+  { path: 'trabajo/:id', component: TrabajosDatailComponent },
+  { path: 'postulate/:id', component: PostulateComponent },
   { path: '**', redirectTo: 'home' },
 
 ];

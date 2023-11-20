@@ -81,7 +81,4 @@ export class NavbarComponent implements OnInit {
     this._router.navigate(['/sing-in']);
   }
 
-  prestadoresPage() {
-    this._router.navigate(['/prestadores']);
-  }
 }

@@ -21,6 +21,12 @@ import { ProfesionalDetalleComponent } from './components/profesional-detalle/pr
 import { PrestadoresDetailComponent } from './pages/prestadores-detail/prestadores-detail.component';
 import { ContratarComponent } from './components/contratar/contratar.component';
 import { ContractComponent } from './pages/contract/contract.component';
+import { TrabajosComponent } from './pages/trabajos/trabajos.component';
+import { TrabajosDatailComponent } from './pages/trabajos-datail/trabajos-datail.component';
+import { JobsComponent } from './components/jobs/jobs.component';
+import { JobDetalleComponent } from './components/job-detalle/job-detalle.component';
+import { PostularComponent } from './components/postular/postular.component';
+import { PostulateComponent } from './pages/postulate/postulate.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +47,13 @@ import { ContractComponent } from './pages/contract/contract.component';
     ProfesionalDetalleComponent,
     PrestadoresDetailComponent,
     ContratarComponent,
-    ContractComponent
+    ContractComponent,
+    TrabajosComponent,
+    TrabajosDatailComponent,
+    JobsComponent,
+    JobDetalleComponent,
+    PostularComponent,
+    PostulateComponent
   ],
   imports: [
     BrowserModule,

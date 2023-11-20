@@ -1,0 +1,47 @@
+<div class="container">
+    <div class="bg-body-tertiary">
+        <div class="row">
+            <form class="col-md-6 offset-md-3" [formGroup]="contratarForm" (ngSubmit)="onSubmit(contratarForm)">
+                <h2 class="text-center">Solicitar trabajo</h2>
+
+                <div class="form-group">
+                    <label for="asunto">Asunto:</label>
+                    <input type="text" class="form-control" id="asunto" name="asunto" formControlName="asunto">
+                </div>
+
+                <div class="form-group">
+                    <label for="mensaje">Mensaje:</label>
+                    <textarea class="form-control" id="mensaje" name="mensaje" rows="8"
+                        formControlName="mensaje"></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-warning my-2" [disabled]="contratarForm.invalid"
+                    data-bs-target="#modalExito" data-bs-toggle="modal">
+                    <div *ngIf="!loading" class="text-black">
+                        Enviar
+                    </div>
+
+                    <div *ngIf="loading" class="spinner-border text-black align-middle"
+                        style="width: 1.5rem; height: 1.5rem; font-size: 0.7rem;" aria-hidden="true">
+                    </div>
+                </button>
+
+                <div class="modal" id="modalExito" tabindex="-1">
+                    <div class="modal-dialog modal-dialog-centered modal-sm modal-static d-flex justify-content-center align-items-center">
+                        <div class="modal-content text-center">
+                            <div *ngIf="loading" class="spinner-border text-black m-auto mt-2" style="font-size: 0.7rem;"
+                                aria-hidden="true"></div>
+                            <div *ngIf="!loading" class="modal-body">
+                                {{textModal}}
+                            </div>
+                            <div class="text-center">
+                                <button type="button" [ngClass]="{'d-none': loading}" class="btn btn-outline-warning text-dark m-2" data-bs-dismiss="modal"
+                                    routerLink="/trabajos">Aceptar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

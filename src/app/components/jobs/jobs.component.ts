@@ -1,18 +1,20 @@
-import { Component, OnInit} from '@angular/core';
-import { IPrestador } from 'src/app/models/prestador';
+
+import { Component, OnInit } from '@angular/core';
+import { ITrabajo } from 'src/app/models/trabajo';
 import { ApiService } from 'src/app/services/api.service';
 
 
 
 
-
 @Component({
-  selector: 'app-profesionales',
-  templateUrl: './profesionales.component.html',
-  styleUrls: ['./profesionales.component.css']
+  selector: 'app-jobs',
+  templateUrl: './jobs.component.html',
+  styleUrls: ['./jobs.component.css']
 })
-export class ProfesionalesComponent implements OnInit {
-  listaPrestadores: IPrestador[] = [];
+
+
+export class JobsComponent implements OnInit {
+  listaTrabajos: ITrabajo[] = [];
   loading: boolean = true;
 
   constructor(private _apiService: ApiService,
@@ -20,15 +22,16 @@ export class ProfesionalesComponent implements OnInit {
 
   ngOnInit(): void {
     document.body.style.overflowY = 'scroll';
-    this._apiService.getPrestadores("").subscribe({
-      next: (data: IPrestador[]) => {
-        this.listaPrestadores = data;
+    this._apiService.getTrabajos("").subscribe({
+      next: (data: ITrabajo[]) => {
+        console.log(data);
+        this.listaTrabajos = data;
         this.loading = false;
       },
       error: (error: any) => {
         const alertElement = document.createElement('div');
         alertElement.className = 'alert alert-warning container text-center fs-5';
-        alertElement.innerText = "No hay prestadores registrados";
+        alertElement.innerText = "No hay trabajos disponibles";
         document.body.appendChild(alertElement);
         console.error(error);
         this.loading = false;
@@ -42,8 +45,8 @@ export class ProfesionalesComponent implements OnInit {
     this._apiService.textObserved.subscribe({
       next: (text: string) => {
         this.loading = true;
-        this._apiService.getPrestadores(text).subscribe({
-          next: (data: IPrestador[]) => {
+        this._apiService.getTrabajos(text).subscribe({
+          next: (data: ITrabajo[]) => {
             if (data.length == 0) {
               const alertElement = document.createElement('div');
               alertElement.className = 'alert alert-warning container text-center fs-5  mt-1 mx-auto';
@@ -53,7 +56,7 @@ export class ProfesionalesComponent implements OnInit {
                 alertElement.remove();
               }, 4000);
             }
-            this.listaPrestadores = data;
+            this.listaTrabajos = data;
             this.loading = false;
           },
           error: (error: any) => {

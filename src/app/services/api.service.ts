@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { IUsuario } from '../models/usuario';
 import { IToken } from '../models/token';
 import { IConsumidor } from '../models/consumidor';
+import { ITrabajo } from '../models/trabajo';
 
 import { Subject } from 'rxjs';
 
@@ -55,8 +56,20 @@ export class ApiService {
     return this._httpClient.post<any>(`${this.urlBase}/mensaje-a-prestador`, { asunto, mensaje, idDestino, token});
   }
 
+  public postMensajeAConsumidor(asunto: string, mensaje: string, idDestino: string, token: string ): Observable<any> {
+    return this._httpClient.post<any>(`${this.urlBase}/mensaje-a-consumidor`, { asunto, mensaje, idDestino, token});
+  }
+
   public getRoles(token: IToken): Observable<any> {
     return this._httpClient.post<any>(`${this.urlBase}/roles`, token);
+  }
+
+  public getTrabajos(filtro?: string): Observable<ITrabajo[]> {
+    return this._httpClient.get<ITrabajo[]>(`${this.urlBase}/trabajo?filtro=${filtro}`);
+  }
+
+  public getTrabajo(id: string): Observable<ITrabajo> {
+    return this._httpClient.get<ITrabajo>(`${this.urlBase}/trabajo/${id}`);
   }
 
   
