@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from 'src/app/services/api.service';
 import { IToken } from 'src/app/models/token';
+import { Token } from '@angular/compiler';
 
 
 @Component({
@@ -46,8 +47,25 @@ export class LoginComponent implements OnInit {
     this._apiService.login(email, password).subscribe({
       next: (data: IToken) => {
         localStorage.setItem('token', data.token);
+        this._apiService.getRoles(data).subscribe({
+          next: (data: any) => {
+            if (data.usuario) {
+              this.router.navigate(['/modal-select']);
+            }
+            if (data.consumidor) {
+              this.router.navigate(['/prestadores']);
+            }
+            if (data.prestador) {
+              this.router.navigate(['/trabajos']);
+            }
+          },
+          error: (error: any) => {
+            console.error(error);
+          }
+        });
         this.loading = false;
-        this.router.navigate(['/prestadores']);
+        
+
       },
       error: (error: any) => {
         const alertElement = document.createElement('div');
@@ -62,4 +80,5 @@ export class LoginComponent implements OnInit {
       }
     })
   }
+
 }

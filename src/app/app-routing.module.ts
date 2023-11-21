@@ -12,6 +12,8 @@ import { TrabajosDatailComponent } from './pages/trabajos-datail/trabajos-datail
 import { PostulateComponent } from './pages/postulate/postulate.component';
 import { CuentaComponent } from './pages/cuenta/cuenta.component';
 import { AyudaComponent } from './pages/ayuda/ayuda.component';
+import { MiPerfilConsumidorComponent } from './pages/mi-perfil-consumidor/mi-perfil-consumidor.component';
+import { MiPerfilPrestadorComponent } from './pages/mi-perfil-prestador/mi-perfil-prestador.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -26,6 +28,8 @@ const routes: Routes = [
   { path: 'postulate/:id', component: PostulateComponent },
   { path: 'account', component: CuentaComponent },
   { path: 'help', component: AyudaComponent },
+  { path: 'my-profile-consumer', component: MiPerfilConsumidorComponent },
+  { path: 'my-profile-provider', component: MiPerfilPrestadorComponent }, 
   { path: '**', redirectTo: 'home' },
 
 ];

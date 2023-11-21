@@ -4,8 +4,6 @@ import { ITrabajo } from 'src/app/models/trabajo';
 import { ApiService } from 'src/app/services/api.service';
 
 
-
-
 @Component({
   selector: 'app-jobs',
   templateUrl: './jobs.component.html',

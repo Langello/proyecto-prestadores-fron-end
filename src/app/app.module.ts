@@ -31,6 +31,10 @@ import { CuentaComponent } from './pages/cuenta/cuenta.component';
 import { AccountComponent } from './components/account/account.component';
 import { HelpComponent } from './components/help/help.component';
 import { AyudaComponent } from './pages/ayuda/ayuda.component';
+import { MyProfileConsumidorComponent } from './components/my-profile-consumidor/my-profile-consumidor.component';
+import { MiPerfilConsumidorComponent } from './pages/mi-perfil-consumidor/mi-perfil-consumidor.component';
+import { MyProfilePrestadorComponent } from './components/my-profile-prestador/my-profile-prestador.component';
+import { MiPerfilPrestadorComponent } from './pages/mi-perfil-prestador/mi-perfil-prestador.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +65,11 @@ import { AyudaComponent } from './pages/ayuda/ayuda.component';
     CuentaComponent,
     AccountComponent,
     HelpComponent,
-    AyudaComponent
+    AyudaComponent,
+    MyProfileConsumidorComponent,
+    MiPerfilConsumidorComponent,
+    MyProfilePrestadorComponent,
+    MiPerfilPrestadorComponent
   ],
   imports: [
     BrowserModule,
