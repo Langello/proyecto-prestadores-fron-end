@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { IToken } from 'src/app/models/token';
 
 
 
@@ -13,6 +14,9 @@ export class ContratarComponent implements OnInit {
   contratarForm!: FormGroup;
   loading: boolean = false;
   textModal: string = '';
+  token: IToken = {
+    token: localStorage.getItem('token') || ''
+  }
 
 
   constructor(
@@ -34,7 +38,7 @@ export class ContratarComponent implements OnInit {
     const idDestino = window.location.pathname.split('/')[2];
     const token = localStorage.getItem('token') || '';
 
-    this._apiService.postMensajeAPrestador(asunto, mensaje, idDestino, token).subscribe({
+    this._apiService.postMensajeAPrestador(asunto, mensaje, idDestino, this.token).subscribe({
       next: (data: any) => {
         this.loading = false;
         this.textModal = data.msg;

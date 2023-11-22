@@ -23,7 +23,9 @@ export class SelectPerfilComponent implements OnInit {
   prestadorForm!: FormGroup;
   consumidorForm!: FormGroup;
   loading: boolean = false;
-  token!: IToken;
+  token: IToken = {
+    token: localStorage.getItem('token') || ''
+  }
 
 
 
@@ -60,7 +62,6 @@ export class SelectPerfilComponent implements OnInit {
 
       const metodoPago = (document.getElementById('metodoPago') as HTMLSelectElement).value;
 
-      const { token } = this.token;
       const consumidor: IConsumidor = {
         metodoPago: metodoPago,
         usuario: null,
@@ -68,7 +69,7 @@ export class SelectPerfilComponent implements OnInit {
       }
 
 
-      this._apiService.postConsumidor(consumidor, token).subscribe({
+      this._apiService.postConsumidor(consumidor, this.token).subscribe({
         next: (data: IConsumidor) => {
           this.loading = false;
           const modal = document.getElementById('consumidorModal');
@@ -111,7 +112,7 @@ export class SelectPerfilComponent implements OnInit {
       const radioCobertura = (document.getElementById('radioCobertura') as HTMLInputElement).value;
 
 
-      const { token } = this.token;
+      
       const prestador: IPrestador = {
         cuilCuit: cuilCuit,
         descripcion: descripcion,
@@ -123,7 +124,7 @@ export class SelectPerfilComponent implements OnInit {
         id: ""
       }
 
-      this._apiService.postPrestador(prestador, token ).subscribe({
+      this._apiService.postPrestador(prestador, this.token ).subscribe({
         next: (data: IPrestador) => {
           this.loading = false;
           const modal = document.getElementById('prestadorModal');

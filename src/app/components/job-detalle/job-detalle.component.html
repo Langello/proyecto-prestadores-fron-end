@@ -26,8 +26,13 @@
         <div class="col-8 offset-2">
             <h5>Horario</h5><p>{{ trabajo.rangoHorario }}</p>
         </div>
+        <div class="col-8 offset-2">
+            <h5>Estado</h5><p>{{ trabajo.estado.nombre.charAt(0).toUpperCase() +
+                trabajo.estado.nombre.slice(1)}}</p>
         <div class="col-8 offset-2 text-center">
-            <button type="button" class="btn btn-warning m-2" routerLink="/postulate/{{trabajo.consumidorId}}">Postularse</button>
+            <button *ngIf="trabajoDisponible" type="button" class="btn btn-warning m-2" routerLink="/postulate/{{trabajo.consumidorId}}">Postularse</button>
+            <button *ngIf="trabajoEstado && !trabajoDisponible" type="button" class="btn btn-outline-warning text-dark m-2">Cambiar estado</button>
+            <button type="button" class="btn btn-outline-dark m-2" (click)="goBack()">Volver</button>
         </div>
 
     </div>

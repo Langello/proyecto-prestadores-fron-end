@@ -20,7 +20,9 @@ export class AccountComponent  implements OnInit {
   showPassword: boolean = false;
   loading: boolean = true;
   usuario!: IUsuario;
-  token!: IToken;
+  token: IToken = {
+    token: localStorage.getItem('token') || ''
+  }
   loading1: boolean = false;
   
 
@@ -33,13 +35,13 @@ export class AccountComponent  implements OnInit {
 
   ngOnInit(): void {
 
-    const token = localStorage.getItem('token');
+    
 
-    if (!token) {
+    if (!this.token) {
       this._router.navigate(['/login']);
       return;
     }
-    this._apiService.getUsuario(token).subscribe({
+    this._apiService.getUsuario(this.token).subscribe({
       next: (data: IUsuario) => {
         this.usuario = data;
         this.loading = false;
@@ -50,7 +52,8 @@ export class AccountComponent  implements OnInit {
           dni: data.dni,
           tipoDni: data.tipoDni,
           fechaNacimiento: data.fechaNacimiento,
-          telefono: data.telefono
+          telefono: data.telefono,
+          password: data.password
         })
       },
       error: (error) => {
@@ -78,14 +81,14 @@ export class AccountComponent  implements OnInit {
     
     this.loading = true;
 
-    const token = localStorage.getItem('token');
+    
 
-    if (!token) {
+    if (!this.token) {
       this._router.navigate(['/login']);
       return;
     }
 
-    this._apiService.putUsuario(token, this.usuarioForm.value).subscribe({
+    this._apiService.putUsuario(this.token, this.usuarioForm.value).subscribe({
       next: (data) => {
         const alertElement = document.createElement('div');
         alertElement.classList.add('alert', 'alert-success', 'container', 'text-center', 'fs-5', 'mt-1', 'mx-auto', 'w-50');

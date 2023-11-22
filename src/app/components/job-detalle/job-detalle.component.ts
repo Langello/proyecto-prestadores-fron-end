@@ -2,14 +2,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
 import { ITrabajo } from 'src/app/models/trabajo';
-import { Token } from '@angular/compiler';
 import { IToken } from 'src/app/models/token';
 
 @Component({
   selector: 'app-job-detalle',
   templateUrl: './job-detalle.component.html',
   styleUrls: ['./job-detalle.component.css'],
-  
+
 })
 
 export class JobDetalleComponent implements OnInit {
@@ -32,8 +31,10 @@ export class JobDetalleComponent implements OnInit {
       id: 0,
       nombre: ''
     },
-    calificacionId: null
+    calificacionId: null,
   }
+  trabajoDisponible!: boolean
+  trabajoEstado!: boolean
 
   constructor(
     private _apiService: ApiService
@@ -45,6 +46,9 @@ export class JobDetalleComponent implements OnInit {
     this._apiService.getTrabajo(this.id).subscribe({
       next: (data: ITrabajo) => {
         this.trabajo = data;
+        if (this.trabajo.estado.id == 6) {
+          this.trabajoDisponible = true;
+        }
         this.loading = false;
       },
       error: (error: any) => {
@@ -57,10 +61,53 @@ export class JobDetalleComponent implements OnInit {
         setTimeout(() => {
           alertElement.remove();
         }, 4000);
-        
+
       }
     });
 
+    this._apiService.getTrabajosByConsumidor(this.token).subscribe({
+      next: (data: ITrabajo[]) => {
+        if (data.length > 0) {
+          this.trabajoEstado = true;
+        }
+        this.loading = false;
+      },
+      error: (error: any) => {
+        const alertElement = document.createElement('div');
+        alertElement.className = 'alert alert-warning container text-center fs-5';
+        alertElement.innerText = error.error.msg;
+        document.body.appendChild(alertElement);
+        console.error(error);
+        this.loading = false;
+        setTimeout(() => {
+          alertElement.remove();
+        }, 4000);
+
+      }
+    })
+
+    this._apiService.esMiTrabajoConsumidor(this.token, this.id).subscribe({
+      next: (data: any) => {
+        this.trabajoEstado = data.msg
+        this.loading = false;
+      },
+      error: (error: any) => {
+        const alertElement = document.createElement('div');
+        alertElement.className = 'alert alert-warning container text-center fs-5';
+        alertElement.innerText = error.error.msg;
+        document.body.prepend(alertElement);
+        console.error(error);
+        this.loading = false;
+        setTimeout(() => {
+          alertElement.remove();
+        }, 4000);
+
+      }
+    })
+  }
+
+  goBack() {
+    window.history.back();
   }
 
 }

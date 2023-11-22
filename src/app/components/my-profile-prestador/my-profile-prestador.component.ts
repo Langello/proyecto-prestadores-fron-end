@@ -3,6 +3,7 @@ import { ITrabajo } from 'src/app/models/trabajo';
 import { ApiService } from 'src/app/services/api.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { IToken } from 'src/app/models/token';
 
 
 @Component({
@@ -17,7 +18,9 @@ export class MyProfilePrestadorComponent implements OnInit {
   mensajesEnviados: any[] = [];
   mensajesRecibidos: any[] = [];
   loading: boolean = true;
-  token: string = localStorage.getItem('token') || '';
+  token: IToken = {
+    token: localStorage.getItem('token') || ''
+  }
   publicarForm!: FormGroup;
 
   constructor(private _apiService: ApiService,
