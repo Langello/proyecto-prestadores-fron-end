@@ -1,48 +1,20 @@
-<div class="container">
+<div class="container bg-body-tertiary">
     <header>
         <h1 class="text-center">Perfil como consumidor</h1>
+        <div id="alert"></div>
     </header>
-
-    <section>
-        <h2>Mensajes</h2>
-        <div id="trabajos">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">N°</th>
-                        <th scope="col">Asunto</th>
-                        <th scope="col">Fecha</th>
-                        <th scope="col">Prestador</th>
-                        <th scope="col">Ver</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th scope="row" class="align-middle">1</th>
-                        <td class="align-middle">dffg</td>
-                        <td class="align-middle">dffg</td>
-                        <td class="align-middle">dfg</td>
-                        <td class="align-middle col-1 ">
-                            <btn class="btn btn-outline-warning btn-sm text-dark" routerLink="">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"
-                                    class="bi bi-box-arrow-in-right" viewBox="0 0 16 16">
-                                    <path fill-rule="evenodd"
-                                        d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0v-2z" />
-                                    <path fill-rule="evenodd"
-                                        d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z" />
-                                </svg>
-                            </btn>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+    <div *ngIf="loading">
+        <div class="d-flex justify-content-center align-items-center">
+            <div class="spinner-border text-warning" style="width: 4rem; height: 4rem; margin: 5rem ;"
+                aria-hidden="true">
+            </div>
         </div>
-    </section>
-
-    <section>
+    </div>
+    <section *ngIf="!loading">
         <div class="d-flex justify-content-between">
             <h2>Trabajos</h2>
-            <button class="btn btn-warning text-dark m-2">Crear Trabajo</button>
+            <button class="btn btn-warning m-2" data-bs-toggle="modal" data-bs-target="#publicarModal"
+                data-bs-dismiss="modal">Publicar trabajo</button>
         </div>
         <div id="trabajos">
             <table class="table">
@@ -57,14 +29,53 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr  *ngFor="let item of listaTrabajos">
-                        <th scope="row" class="align-middle">{{item.id}}</th>
-                        <td class="align-middle">{{item.nombre}}</td>
-                        <td class="align-middle">{{item.fecha.substring(0,10)}}</td>
-                        <td class="align-middle">{{item.lugar}}</td>
-                        <td class="align-middle col-5">
-                            <span title="{{item.tareas}}">{{item.estadoId}}</span>
+                    <tr *ngFor="let item of listaTrabajos.reverse(); let i = index">
+                        <th scope="row" class="align-middle col-1">{{i+1}}</th>
+                        <td class="align-middle col-2">{{item.nombre}}</td>
+                        <td class="align-middle col-2">{{item.fecha.substring(0,10)}}</td>
+                        <td class="align-middle col-2">{{item.lugar}}</td>
+                        <td class="align-middle col-2">
+                            <span title="{{item.estado}}">{{item.estado.nombre.charAt(0).toUpperCase() +
+                                item.estado.nombre.slice(1)}}</span>
                         </td>
+                        <td class="align-middle col-1 ">
+                            <btn class="btn btn-outline-warning btn-sm text-dark" routerLink="/trabajo/{{item.id}}">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"
+                                    class="bi bi-box-arrow-in-right" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                        d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0v-2z" />
+                                    <path fill-rule="evenodd"
+                                        d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z" />
+                                </svg>
+                            </btn>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+    <section *ngIf="!loading">
+        <h2>Mensajes recibidos</h2>
+        <div id="mensajesRecibidos">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">N°</th>
+                        <th scope="col">Asunto</th>
+                        <th scope="col">Fecha</th>
+                        <th scope="col">Prestador</th>
+                        <th scope="col">Ver</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of mensajesRecibidos.reverse(); let i = index">
+                        <th scope="row" class="align-middle col-1">{{i+1}}</th>
+                        <td class="align-middle col-4">{{item.asunto}}</td>
+                        <td class="align-middle col-3">{{item.createdAt}}</td>
+                        <td class="align-middle col-3">{{item.prestadore.usuario.nombre.charAt(0).toUpperCase() +
+                            item.prestadore.usuario.nombre.slice(1)}}
+                            {{item.prestadore.usuario.apellido.charAt(0).toUpperCase() +
+                            item.prestadore.usuario.apellido.slice(1)}}</td>
                         <td class="align-middle col-1 ">
                             <btn class="btn btn-outline-warning btn-sm text-dark" routerLink="">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"
@@ -81,4 +92,125 @@
             </table>
         </div>
     </section>
+    <section *ngIf="!loading">
+        <h2>Mensajes enviados</h2>
+        <div id="mensajesEnviados">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">N°</th>
+                        <th scope="col">Asunto</th>
+                        <th scope="col">Fecha</th>
+                        <th scope="col">Prestador</th>
+                        <th scope="col">Ver</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of mensajesEnviados.reverse(); let i = index">
+                        <th scope="row" class="align-middle col-1">{{i+1}}</th>
+                        <td class="align-middle col-4">{{item.asunto}}</td>
+                        <td class="align-middle col-3">{{item.createdAt}}</td>
+                        <td class="align-middle col-3">{{item.prestadore.usuario.nombre.charAt(0).toUpperCase() +
+                            item.prestadore.usuario.nombre.slice(1)}}
+                            {{item.prestadore.usuario.apellido.charAt(0).toUpperCase() +
+                            item.prestadore.usuario.apellido.slice(1)}}</td>
+                        <td class="align-middle col-1 ">
+                            <btn class="btn btn-outline-warning btn-sm text-dark" routerLink="">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"
+                                    class="bi bi-box-arrow-in-right" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                        d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0v-2z" />
+                                    <path fill-rule="evenodd"
+                                        d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z" />
+                                </svg>
+                            </btn>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</div>
+
+<div class="modal fade" id="publicarModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Publicar trabajo</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form id="publicarForm" [formGroup]="publicarForm">
+                <div class="modal-body">
+
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label">Nombre del trabajo</label>
+                        <input type="text" class="form-control" id="nombre" placeholder="Pintar el frente de mi casa"
+                            formControlName="nombre"
+                            [ngClass]="{ 'is-invalid': publicarForm.get('nombre')?.errors && publicarForm.get('nombre')?.touched }">
+                        <div class="text-danger text-center" formControlName="nombre"
+                            *ngIf="publicarForm.get('nombre')?.hasError('required') && publicarForm.get('nombre')?.touched">
+                            <li>Este campo es requerido</li>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="fecha" class="form-label">Fecha</label>
+                        <input type="date" class="form-control" id="fecha" placeholder="Ingrese la fecha"
+                            formControlName="fecha"
+                            [ngClass]="{ 'is-invalid': publicarForm.get('fecha')?.errors && publicarForm.get('fecha')?.touched }">
+                    </div>
+
+                    <div class="text-danger text-center" formControlName="fecha"
+                        *ngIf="publicarForm.get('fecha')?.hasError('required') && publicarForm.get('fecha')?.touched">
+                        <li>Este campo es requerido</li>
+                    </div>
+
+                    <div>
+                        <label for="lugar" class="form-label">Lugar</label>
+                        <input type="text" class="form-control" id="lugar" placeholder="Ingrese el lugar"
+                            formControlName="lugar"
+                            [ngClass]="{ 'is-invalid': publicarForm.get('lugar')?.errors && publicarForm.get('lugar')?.touched }">
+                    </div>
+
+                    <div class="text-danger text-center" formControlName="lugar"
+                        *ngIf="publicarForm.get('lugar')?.hasError('required') && publicarForm.get('lugar')?.touched">
+                        <li>Este campo es requerido</li>
+                    </div>
+
+                    <div>
+                        <label for="rangoHorario" class="form-label">Rango Horario</label>
+                        <input type="text" class="form-control" id="rangoHorario" placeholder="Ingrese el rango horario"
+                            formControlName="rangoHorario"
+                            [ngClass]="{ 'is-invalid': publicarForm.get('rangoHorario')?.errors && publicarForm.get('rangoHorario')?.touched }">
+                    </div>
+
+                    <div class="text-danger text-center" formControlName="rangoHorario"
+                        *ngIf="publicarForm.get('rangoHorario')?.hasError('required') && publicarForm.get('rangoHorario')?.touched">
+                        <li>Este campo es requerido</li>
+                    </div>
+
+                    <div>
+                        <label for="tareas" class="form-label">Tareas</label>
+                        <textarea class="form-control" id="tareas" rows="3" placeholder="Ingrese las tareas"
+                            formControlName="tareas"
+                            [ngClass]="{ 'is-invalid': publicarForm.get('tareas')?.errors && publicarForm.get('tareas')?.touched }"></textarea>
+                    </div>
+
+                    <div class="text-danger text-center" formControlName="tareas"
+                        *ngIf="publicarForm.get('tareas')?.hasError('required') && publicarForm.get('tareas')?.touched">
+                        <li>Este campo es requerido</li>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" (click)="publicar()" class="btn btn-warning " [disabled]="!publicarForm.valid"
+                        data-bs-dismiss="modal">
+                        <div class="text-black">Confirmar</div>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>

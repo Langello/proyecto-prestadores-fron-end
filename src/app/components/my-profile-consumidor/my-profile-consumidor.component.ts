@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ITrabajo } from 'src/app/models/trabajo';
 import { ApiService } from 'src/app/services/api.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -10,24 +12,39 @@ import { ApiService } from 'src/app/services/api.service';
 })
 export class MyProfileConsumidorComponent implements OnInit {
   listaTrabajos: ITrabajo[] = [];
+  mensajesEnviados: any[] = [];
+  mensajesRecibidos: any[] = [];
   loading: boolean = true;
+  token: string = localStorage.getItem('token') || '';
+  publicarForm!: FormGroup;
 
   constructor(private _apiService: ApiService,
+    private fb: FormBuilder,
+    private _router: Router
+
   ) { }
 
   ngOnInit(): void {
     document.body.style.overflowY = 'scroll';
-    this._apiService.getTrabajos("").subscribe({
+
+    this.publicarForm = this.fb.group({
+      nombre: ['', Validators.required],
+      fecha: ['', Validators.required],
+      lugar: ['', Validators.required],
+      rangoHorario: ['', Validators.required],
+      tareas: ['', Validators.required]
+    })
+
+    this._apiService.getTrabajosByConsumidor(this.token).subscribe({
       next: (data: ITrabajo[]) => {
-        console.log(data);
         this.listaTrabajos = data;
         this.loading = false;
       },
       error: (error: any) => {
         const alertElement = document.createElement('div');
-        alertElement.className = 'alert alert-warning container text-center fs-5';
+        alertElement.className = 'alert alert-warning container text-center fs-5 mt-1 mx-auto w-50';
         alertElement.innerText = "No hay trabajos disponibles";
-        document.body.appendChild(alertElement);
+        document.getElementById('alert')?.appendChild(alertElement);
         console.error(error);
         this.loading = false;
         setTimeout(() => {
@@ -36,5 +53,71 @@ export class MyProfileConsumidorComponent implements OnInit {
 
       }
     });
+
+    this._apiService.getMensajeConsumidorRecibido(this.token).subscribe({
+      next: (data: any) => {
+        this.mensajesRecibidos = data;
+        this.loading = false;
+      },
+      error: (error: any) => {
+        console.error(error);
+      }
+    })
+
+    this._apiService.getMensajeConsumidorEnviado(this.token).subscribe({
+      next: (data: any) => {
+        this.mensajesEnviados = data;
+        this.loading = false;
+      },
+      error: (error: any) => {
+        console.error(error);
+      }
+    })
   }
+
+  publicar() {
+    this._apiService.postTrabajo(this.publicarForm.value, this.token).subscribe({
+      next: (data: any) => {
+        this._router.navigate(['/my-profile-consumer']);
+        const alertElement = document.createElement('div');
+        alertElement.className = 'alert alert-success container text-center fs-5 mt-1 mx-auto w-50';
+        alertElement.innerText = data.msg;
+        document.getElementById('alert')?.appendChild(alertElement);
+        setTimeout(() => {
+          alertElement.remove();
+        }, 4000);
+
+        this._apiService.getTrabajosByConsumidor(this.token).subscribe({
+          next: (data: ITrabajo[]) => {
+            this.listaTrabajos = data;
+            this.loading = false;
+          },
+          error: (error: any) => {
+            const alertElement = document.createElement('div');
+            alertElement.className = 'alert alert-warning container text-center fs-5 mt-1 mx-auto w-50';
+            alertElement.innerText = "No hay trabajos disponibles";
+            document.getElementById('alert')?.appendChild(alertElement);
+            console.error(error);
+            this.loading = false;
+            setTimeout(() => {
+              alertElement.remove();
+            }, 4000);
+          }
+        });
+      },
+      error: (error: any) => {
+        const alertElement = document.createElement('div');
+        alertElement.className = 'alert alert-warning container text-center fs-5 mt-1 mx-auto w-50';
+        alertElement.innerText = error.error.msg;
+        document.getElementById('alert')?.appendChild(alertElement);
+        console.error(error);
+        this.loading = false;
+        setTimeout(() => {
+          alertElement.remove();
+        }, 4000);
+      }
+    });
+
+  }
+
 }

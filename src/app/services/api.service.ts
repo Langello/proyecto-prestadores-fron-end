@@ -63,6 +63,22 @@ export class ApiService {
     return this._httpClient.post<any>(`${this.urlBase}/mensaje-a-consumidor`, { asunto, mensaje, idDestino, token });
   }
 
+  public getMensajeConsumidorRecibido (token: string): Observable<any> {
+    return this._httpClient.get<any>(`${this.urlBase}/mensaje-consumidor-recibido/${token}`);
+  }
+
+  public getMensajePrestadorRecibido (token: string): Observable<any> {
+    return this._httpClient.get<any>(`${this.urlBase}/mensaje-prestador-recibido/${token}`);
+  }
+
+  public getMensajePrestadorEnviado (token: string): Observable<any> {
+    return this._httpClient.get<any>(`${this.urlBase}/mensaje-prestador-enviado/${token}`);
+  }
+
+  public getMensajeConsumidorEnviado (token: string): Observable<any> {
+    return this._httpClient.get<any>(`${this.urlBase}/mensaje-consumidor-enviado/${token}`);
+  }
+
   public getRoles(token: IToken): Observable<any> {
     return this._httpClient.post<any>(`${this.urlBase}/roles`, token);
   }
@@ -75,5 +91,16 @@ export class ApiService {
     return this._httpClient.get<ITrabajo>(`${this.urlBase}/trabajo/${id}`);
   }
 
+  public getTrabajosByConsumidor(token : string): Observable<ITrabajo[]> {
+    return this._httpClient.get<ITrabajo[]>(`${this.urlBase}/trabajo-consumidor/${token}`);
+  }
+
+  public getTrabajosByPrestador(token : string): Observable<ITrabajo[]> {
+    return this._httpClient.get<ITrabajo[]>(`${this.urlBase}/trabajo-prestador/${token}`);
+  }
+
+  public postTrabajo(trabajo: ITrabajo, token: string): Observable<ITrabajo> {
+    return this._httpClient.post<ITrabajo>(`${this.urlBase}/trabajo`, { ...trabajo, token });
+  }
 
 }

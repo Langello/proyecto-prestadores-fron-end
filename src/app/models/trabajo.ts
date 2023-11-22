@@ -1,3 +1,4 @@
+import { IEstado } from "./estado";
 export interface ITrabajo {
     id:             string;
     nombre:         string;
@@ -7,6 +8,6 @@ export interface ITrabajo {
     prestadorId:    number | null;
     consumidorId:   number;
     tareas:         string;
-    estadoId:       number | null;
+    estado:         IEstado;
     calificacionId: number | null;
 }

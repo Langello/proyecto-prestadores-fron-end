@@ -2,16 +2,21 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
 import { ITrabajo } from 'src/app/models/trabajo';
+import { Token } from '@angular/compiler';
+import { IToken } from 'src/app/models/token';
 
 @Component({
   selector: 'app-job-detalle',
   templateUrl: './job-detalle.component.html',
-  styleUrls: ['./job-detalle.component.css']
+  styleUrls: ['./job-detalle.component.css'],
+  
 })
 
 export class JobDetalleComponent implements OnInit {
 
-
+  token: IToken = {
+    token: localStorage.getItem('token') || ''
+  }
   loading: boolean = false;
   id: string = '';
   trabajo: ITrabajo = {
@@ -23,7 +28,10 @@ export class JobDetalleComponent implements OnInit {
     prestadorId: null,
     consumidorId: 0,
     tareas: '',
-    estadoId: null,
+    estado: {
+      id: 0,
+      nombre: ''
+    },
     calificacionId: null
   }
 
@@ -52,6 +60,7 @@ export class JobDetalleComponent implements OnInit {
         
       }
     });
+
   }
 
 }
