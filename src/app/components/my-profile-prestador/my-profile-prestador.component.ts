@@ -89,7 +89,7 @@ export class MyProfilePrestadorComponent implements OnInit {
           alertElement.remove();
         }, 4000);
 
-        this._apiService.getTrabajosByConsumidor(this.token).subscribe({
+        this._apiService.getTrabajosByPrestador(this.token).subscribe({
           next: (data: ITrabajo[]) => {
             this.listaTrabajos = data;
             this.loading = false;

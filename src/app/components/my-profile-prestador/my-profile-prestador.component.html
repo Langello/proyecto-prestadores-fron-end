@@ -63,7 +63,7 @@
                         <th scope="col">N°</th>
                         <th scope="col">Asunto</th>
                         <th scope="col">Fecha</th>
-                        <th scope="col">Prestador</th>
+                        <th scope="col">Cliente</th>
                         <th scope="col">Ver</th>
                     </tr>
                 </thead>
@@ -72,10 +72,10 @@
                         <th scope="row" class="align-middle col-1">{{i+1}}</th>
                         <td class="align-middle col-4">{{item.asunto}}</td>
                         <td class="align-middle col-3">{{item.createdAt}}</td>
-                        <td class="align-middle col-3">{{item.prestadore.usuario.nombre.charAt(0).toUpperCase() +
-                            item.prestadore.usuario.nombre.slice(1)}}
-                            {{item.prestadore.usuario.apellido.charAt(0).toUpperCase() +
-                            item.prestadore.usuario.apellido.slice(1)}}</td>
+                        <td class="align-middle col-3">{{item.consumidor.usuario.nombre.charAt(0).toUpperCase() +
+                            item.consumidor.usuario.nombre.slice(1)}}
+                            {{item.consumidor.usuario.apellido.charAt(0).toUpperCase() +
+                            item.consumidor.usuario.apellido.slice(1)}}</td>
                         <td class="align-middle col-1 ">
                             <btn class="btn btn-outline-warning btn-sm text-dark" routerLink="">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"
@@ -101,7 +101,7 @@
                         <th scope="col">N°</th>
                         <th scope="col">Asunto</th>
                         <th scope="col">Fecha</th>
-                        <th scope="col">Prestador</th>
+                        <th scope="col">Cliente</th>
                         <th scope="col">Ver</th>
                     </tr>
                 </thead>
@@ -110,10 +110,10 @@
                         <th scope="row" class="align-middle col-1">{{i+1}}</th>
                         <td class="align-middle col-4">{{item.asunto}}</td>
                         <td class="align-middle col-3">{{item.createdAt}}</td>
-                        <td class="align-middle col-3">{{item.prestadore.usuario.nombre.charAt(0).toUpperCase() +
-                            item.prestadore.usuario.nombre.slice(1)}}
-                            {{item.prestadore.usuario.apellido.charAt(0).toUpperCase() +
-                            item.prestadore.usuario.apellido.slice(1)}}</td>
+                        <td class="align-middle col-3">{{item.consumidor.usuario.nombre.charAt(0).toUpperCase() +
+                            item.consumidor.usuario.nombre.slice(1)}}
+                            {{item.consumidor.usuario.apellido.charAt(0).toUpperCase() +
+                            item.consumidor.usuario.apellido.slice(1)}}</td>
                         <td class="align-middle col-1 ">
                             <btn class="btn btn-outline-warning btn-sm text-dark" routerLink="">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"
