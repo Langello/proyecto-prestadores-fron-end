@@ -158,6 +158,13 @@ export class JobDetalleComponent implements OnInit {
     this.loading = true;
     this._apiService.patchTrabajoEstado(this.id, this.token, this.trabajoNuevoEstado).subscribe({
       next: (data: any) => {
+        setTimeout(() => {
+          scrollTo(0, 0);
+          const alertElement = document.createElement('div');
+          alertElement.className = 'alert alert-success container text-center fs-5';
+          alertElement.innerText = data.msg;
+          document.getElementById('alert')?.appendChild(alertElement);
+        }, 3000);
         this.ngOnInit();
       },
       error: (error: any) => {
@@ -177,22 +184,28 @@ export class JobDetalleComponent implements OnInit {
 
   asignarPrestador() {
     this.idPrestadorAsignado = (<HTMLSelectElement>document.getElementById('prestador')).value;
-    this.loading = true;
 
     this._apiService.patchTrabajoPrestadorAsignado(this.id, this.token, this.idPrestadorAsignado).subscribe({
       next: (data: any) => {
-        this.ngOnInit();
+        
+        setTimeout(() => {
+          scrollTo(0, 0);
+          const alertElement = document.createElement('div');
+          alertElement.className = 'alert alert-success container text-center fs-5';
+          alertElement.innerText = data.msg;
+          document.getElementById('alert')?.appendChild(alertElement);
+        }, 3000);
+        this.cambiarEstado();
       },
       error: (error: any) => {
+        scrollTo(0, 0);
         const alertElement = document.createElement('div');
         alertElement.className = 'alert alert-warning container text-center fs-5';
         alertElement.innerText = error.error.msg;
         document.getElementById('alert')?.appendChild(alertElement);
-        console.error(error);
-        this.loading = false;
         setTimeout(() => {
           alertElement.remove();
-        }, 4000);
+        }, 5000);
 
       }
     })

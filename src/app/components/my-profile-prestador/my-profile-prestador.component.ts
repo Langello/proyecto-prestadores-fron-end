@@ -22,6 +22,7 @@ export class MyProfilePrestadorComponent implements OnInit {
     token: localStorage.getItem('token') || ''
   }
   publicarForm!: FormGroup;
+  prestadorId: string = '';
 
   constructor(private _apiService: ApiService,
     private fb: FormBuilder,
@@ -62,6 +63,16 @@ export class MyProfilePrestadorComponent implements OnInit {
     this._apiService.getMensajePrestadorRecibido(this.token).subscribe({
       next: (data: any) => {
         this.mensajesRecibidos = data;
+        this.loading = false;
+      },
+      error: (error: any) => {
+        console.error(error);
+      }
+    })
+
+    this._apiService.getPrestadorIdByToken(this.token).subscribe({
+      next: (data: any) => {
+        this.prestadorId = data;
         this.loading = false;
       },
       error: (error: any) => {

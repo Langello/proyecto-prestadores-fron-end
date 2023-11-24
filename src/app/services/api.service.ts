@@ -51,6 +51,10 @@ export class ApiService {
     return this._httpClient.post<IPrestador>(`${this.urlBase}/prestador`, { ...prestador, ...token });
   }
 
+  public getPrestadorIdByToken (token: IToken): Observable<IPrestador> {
+    return this._httpClient.get<IPrestador>(`${this.urlBase}/prestador-id/${token.token}`);
+  }
+
   public postConsumidor(consumidor: IConsumidor, token: IToken): Observable<IConsumidor> {
     return this._httpClient.post<IConsumidor>(`${this.urlBase}/consumidor`, { ...consumidor, ...token });
   }
