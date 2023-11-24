@@ -7,33 +7,89 @@
 <div *ngIf="!loading" class="container bg-body-tertiary">
     <div class="row">
         <div class="col-6 offset-3 text-center">
-            <h2>
+            <h2 id="alert">
                 Descripcion del trabajo
             </h2>
         </div>
         <div class="col-8 offset-2">
-            <h4>Nombre</h4><p>{{ trabajo.nombre }}</p>
+            <h4>Nombre</h4>
+            <p>{{ trabajo.nombre }}</p>
         </div>
         <div class="col-8 offset-2">
-            <h5>Tareas</h5><p>{{ trabajo.tareas }}</p>
+            <h5>Tareas</h5>
+            <p>{{ trabajo.tareas }}</p>
         </div>
         <div class="col-8 offset-2">
-            <h5>Lugar</h5><p>{{ trabajo.lugar }}</p>
+            <h5>Lugar</h5>
+            <p>{{ trabajo.lugar }}</p>
         </div>
         <div class="col-8 offset-2">
-            <h5>Fecha</h5><p>{{ trabajo.fecha.substring(0,10) }}</p>
+            <h5>Fecha</h5>
+            <p>{{ trabajo.fecha.substring(0,10) }}</p>
         </div>
         <div class="col-8 offset-2">
-            <h5>Horario</h5><p>{{ trabajo.rangoHorario }}</p>
+            <h5>Horario</h5>
+            <p>{{ trabajo.rangoHorario }}</p>
         </div>
         <div class="col-8 offset-2">
-            <h5>Estado</h5><p>{{ trabajo.estado.nombre.charAt(0).toUpperCase() +
-                trabajo.estado.nombre.slice(1)}}</p>
-        <div class="col-8 offset-2 text-center">
-            <button *ngIf="trabajoDisponible" type="button" class="btn btn-warning m-2" routerLink="/postulate/{{trabajo.consumidorId}}">Postularse</button>
-            <button *ngIf="trabajoEstado && !trabajoDisponible" type="button" class="btn btn-outline-warning text-dark m-2">Cambiar estado</button>
-            <button type="button" class="btn btn-outline-dark m-2" (click)="goBack()">Volver</button>
-        </div>
+            <h5>Estado</h5>
+            <p>{{trabajo.estado.nombre}}</p>
+            <div class="col-8 offset-2 text-center">
+                <button *ngIf="trabajoDisponible && !trabajoEsMioConsumidor" type="button" class="btn btn-warning m-2"
+                    routerLink="/postulate/{{trabajo.consumidorId}}">Postularse</button>
+                <button *ngIf="trabajoEsMioConsumidor || trabajoEsMioPrestador" type="button"
+                    class="btn btn-outline-warning text-dark m-2" data-bs-toggle="modal"
+                    data-bs-target="#cambiarEstadoModal">
+                    Cambiar estado
+                </button>
+                <button type="button" class="btn btn-outline-dark m-2" (click)="goBack()">Volver</button>
+            </div>
 
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="cambiarEstadoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Cambiar estado</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <select class="form-select" id="estadoTrabajoNuevo" #estadoTrabajo (change)="mostrarFormAsignarPrestador()">
+                    <option selected value="{{trabajo.estado.id}}">
+                        {{trabajo.estado.nombre}}</option>
+                    <option value="1" *ngIf="trabajo.estado.nombre  == 'Publicado' && trabajoEsMioConsumidor">
+                        🟡 Aceptado</option>
+                    <option value="4" *ngIf="trabajo.estado.nombre == 'Aceptado' && trabajoEsMioPrestador">
+                        🟢 Activo</option>
+                    <option value="2" *ngIf="trabajoEsMioConsumidor || trabajoEsMioPrestador">
+                        🔴 Cancelado</option>
+                    <option value="5" *ngIf="trabajoEsMioConsumidor && trabajo.estado.nombre == 'Activo' ">
+                        🔵 Finalizado</option>
+                </select>
+                <form *ngIf="mostrarAsignarPrestador" class="mt-3" [formGroup]="formAsignarPrestador" >
+                    <div class="form-group">
+                        <label for="prestador">Prestador:</label>
+                        <input type="number" class="form-control" id="prestador" formControlName="prestadorId">
+                    </div>
+                </form>
+                <ul class="mt-2 list-unstyled">
+                    <li><b>"Publicado"</b> El trabajo ha sido publicado y espera a que algun prestador se postule.</li>
+                    <li><b>🟡"Aceptado"</b> El trabajo ha sido aceptado y espera a que el prestador lo ponga activo.</li>
+                    <li><b>🟢"Activo"</b> El trabajo esta siendo realizado por el prestador.</li>
+                    <li><b>🔵"Finalizado"</b> El trabajo ha sido finalizado.</li>
+                    <li><b>🔴"Cancelado"</b> El trabajo ha sido cancelado.</li>
+                </ul>
+            </div>
+            <div class="modal-footer">
+                <button type="button" [disabled]="!formAsignarPrestador.valid" class="btn btn-outline-warning text-dark" data-bs-dismiss="modal" (click)="[asignarPrestador(), cambiarEstado()]">Guardar
+                    cambio</button>
+                <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
     </div>
 </div>

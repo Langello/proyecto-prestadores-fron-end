@@ -35,8 +35,7 @@
                         <td class="align-middle col-2">{{item.fecha.substring(0,10)}}</td>
                         <td class="align-middle col-2">{{item.lugar}}</td>
                         <td class="align-middle col-2">
-                            <span title="{{item.estado}}">{{item.estado.nombre.charAt(0).toUpperCase() +
-                                item.estado.nombre.slice(1)}}</span>
+                            <span title="{{item.estado}}">{{item.estado.nombre}}</span>
                         </td>
                         <td class="align-middle col-1 ">
                             <btn class="btn btn-outline-warning btn-sm text-dark" routerLink="/trabajo/{{item.id}}">

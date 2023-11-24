@@ -6,7 +6,6 @@ import { IUsuario } from '../models/usuario';
 import { IToken } from '../models/token';
 import { IConsumidor } from '../models/consumidor';
 import { ITrabajo } from '../models/trabajo';
-
 import { Subject } from 'rxjs';
 
 
@@ -41,7 +40,7 @@ export class ApiService {
   }
 
   public putUsuario(token: IToken, usuario: IUsuario): Observable<any> {
-    return this._httpClient.put<any>(`${this.urlBase}/usuario`, { ...usuario, token });
+    return this._httpClient.put<any>(`${this.urlBase}/usuario`, { ...usuario, ...token });
   }
 
   public login(email: string, password: string): Observable<IToken> {
@@ -49,11 +48,11 @@ export class ApiService {
   }
 
   public postPrestador(prestador: IPrestador, token: IToken): Observable<IPrestador> {
-    return this._httpClient.post<IPrestador>(`${this.urlBase}/prestador`, { ...prestador, token });
+    return this._httpClient.post<IPrestador>(`${this.urlBase}/prestador`, { ...prestador, ...token });
   }
 
   public postConsumidor(consumidor: IConsumidor, token: IToken): Observable<IConsumidor> {
-    return this._httpClient.post<IConsumidor>(`${this.urlBase}/consumidor`, { ...consumidor, token });
+    return this._httpClient.post<IConsumidor>(`${this.urlBase}/consumidor`, { ...consumidor, ...token });
   }
   public postMensajeAPrestador(asunto: string, mensaje: string, idDestino: string, token: IToken): Observable<any> {
     return this._httpClient.post<any>(`${this.urlBase}/mensaje-a-prestador`, { asunto, mensaje, idDestino, ...token });
@@ -109,6 +108,14 @@ export class ApiService {
 
   public esMiTrabajoPrestador(token: IToken, idTrabajo: string): Observable<any> {
     return this._httpClient.post<any>(`${this.urlBase}/es-mi-trabajo-prestador`, { ...token, idTrabajo });
+  }
+
+  public patchTrabajoEstado(idTrabajo: string, token: IToken, estadoId: string): Observable<any> {
+    return this._httpClient.patch<any>(`${this.urlBase}/trabajo-estado/${idTrabajo}`, { ...token, estadoId });
+  }
+
+  public patchTrabajoPrestadorAsignado(idTrabajo: string, token: IToken, prestadorId: string): Observable<any> {
+    return this._httpClient.patch<any>(`${this.urlBase}/trabajo-prestador-asignado/${idTrabajo}`, { ...token, prestadorId });
   }
 
 }
