@@ -1,4 +1,5 @@
 import { IEstado } from "./estado";
+import { ICalificacion } from "./calificacion";
 export interface ITrabajo {
     id:             string;
     nombre:         string;
@@ -10,4 +11,5 @@ export interface ITrabajo {
     tareas:         string;
     estado:         IEstado;
     calificacionId: number | null;
+    calificacione:   ICalificacion | null;
 }

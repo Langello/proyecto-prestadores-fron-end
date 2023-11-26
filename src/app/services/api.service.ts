@@ -122,4 +122,8 @@ export class ApiService {
     return this._httpClient.patch<any>(`${this.urlBase}/trabajo-prestador-asignado/${idTrabajo}`, { ...token, prestadorId });
   }
 
+  public postCalificacion(idTrabajo: string, token: IToken, estrellas: number, comentario?: string): Observable<any> {
+    return this._httpClient.patch<any>(`${this.urlBase}/trabajo-calificacion/${idTrabajo}`, { ...token, estrellas, comentario });
+  }
+
 }

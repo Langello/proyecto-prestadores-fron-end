@@ -5,128 +5,223 @@
     </header>
     <div *ngIf="loading">
         <div class="d-flex justify-content-center align-items-center">
-            <div class="spinner-border text-warning" style="width: 4rem; height: 4rem; margin: 5rem ;"
-                aria-hidden="true">
+            <div class="spinner-border text-warning" style="width: 4rem; height: 4rem; margin: 5rem" aria-hidden="true">
             </div>
         </div>
     </div>
     <section *ngIf="!loading">
-        <div class="d-flex justify-content-between">
-            <h2>Trabajos publicados</h2>
-            <button class="btn btn-warning m-2" data-bs-toggle="modal" data-bs-target="#publicarModal"
-                data-bs-dismiss="modal">Publicar trabajo</button>
-        </div>
-        <div id="trabajos">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">N°</th>
-                        <th scope="col">Nombre</th>
-                        <th scope="col">Fecha</th>
-                        <th scope="col">Lugar</th>
-                        <th scope="col">Estado</th>
-                        <th scope="col">Ver</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let item of listaTrabajos.reverse(); let i = index">
-                        <th scope="row" class="align-middle col-1">{{i+1}}</th>
-                        <td class="align-middle col-2">{{item.nombre}}</td>
-                        <td class="align-middle col-2">{{item.fecha.substring(0,10)}}</td>
-                        <td class="align-middle col-2">{{item.lugar}}</td>
-                        <td class="align-middle col-2">
-                            <span title="{{item.estado}}">{{item.estado.nombre}}</span>
-                        </td>
-                        <td class="align-middle col-1 ">
-                            <btn class="btn btn-outline-warning btn-sm text-dark" routerLink="/trabajo/{{item.id}}">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"
-                                    class="bi bi-box-arrow-in-right" viewBox="0 0 16 16">
-                                    <path fill-rule="evenodd"
-                                        d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0v-2z" />
-                                    <path fill-rule="evenodd"
-                                        d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z" />
-                                </svg>
-                            </btn>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </section>
-    <section *ngIf="!loading">
-        <h2>Mensajes recibidos</h2>
-        <div id="mensajesRecibidos">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">N°</th>
-                        <th scope="col">Asunto</th>
-                        <th scope="col">Fecha</th>
-                        <th scope="col">Prestador</th>
-                        <th scope="col">Ver</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let item of mensajesRecibidos.reverse(); let i = index">
-                        <th scope="row" class="align-middle col-1">{{i+1}}</th>
-                        <td class="align-middle col-4">{{item.asunto}}</td>
-                        <td class="align-middle col-3">{{item.createdAt}}</td>
-                        <td class="align-middle col-3">{{item.prestadore.usuario.nombre.charAt(0).toUpperCase() +
-                            item.prestadore.usuario.nombre.slice(1)}}
-                            {{item.prestadore.usuario.apellido.charAt(0).toUpperCase() +
-                            item.prestadore.usuario.apellido.slice(1)}}</td>
-                        <td class="align-middle col-1 ">
-                            <btn class="btn btn-outline-warning btn-sm text-dark" routerLink="">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"
-                                    class="bi bi-box-arrow-in-right" viewBox="0 0 16 16">
-                                    <path fill-rule="evenodd"
-                                        d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0v-2z" />
-                                    <path fill-rule="evenodd"
-                                        d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z" />
-                                </svg>
-                            </btn>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+
+        <div class="accordion" id="accordionTrabajos">
+
+            <div class="accordion-item">
+
+                <h2 class="accordion-header" id="headingTrabajos">
+
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseTrabajos" aria-expanded="true" aria-controls="collapseTrabajos">
+                        <h2>Mis trabajos publicados</h2>
+                    </button>
+
+                </h2>
+
+                <div id="collapseTrabajos" class="accordion-collapse collapse" aria-labelledby="headingTrabajos"
+                    data-bs-parent="#accordionTrabajos">
+
+                    <div class="accordion-body">
+
+                        <div id="trabajos">
+                            <button class="btn btn-warning m-2" data-bs-toggle="modal" data-bs-target="#publicarModal"
+                                data-bs-dismiss="modal">Publicar trabajo</button>
+                            <div class="table-responsive">
+                                <table class="table">
+
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">N°</th>
+                                            <th scope="col">Nombre</th>
+                                            <th scope="col">Fecha</th>
+                                            <th scope="col">Lugar</th>
+                                            <th scope="col">Estado</th>
+                                            <th scope="col">Ver</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let item of listaTrabajos.reverse(); let i = index">
+                                            <th scope="row" class="align-middle col-1">{{ i + 1 }}</th>
+                                            <td class="align-middle col-2">{{ item.nombre }}</td>
+                                            <td class="align-middle col-2">
+                                                {{ item.fecha.substring(0, 10) }}
+                                            </td>
+                                            <td class="align-middle col-2">{{ item.lugar }}</td>
+                                            <td class="align-middle col-2">
+                                                <span title="{{ item.estado }}">{{
+                                                    item.estado.nombre
+                                                    }}</span>
+                                            </td>
+                                            <td class="align-middle col-1">
+                                                <btn class="btn btn-outline-warning btn-sm text-dark"
+                                                    routerLink="/trabajo/{{ item.id }}">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                                                        fill="currentColor" class="bi bi-box-arrow-in-right"
+                                                        viewBox="0 0 16 16">
+                                                        <path fill-rule="evenodd"
+                                                            d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0v-2z" />
+                                                        <path fill-rule="evenodd"
+                                                            d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z" />
+                                                    </svg>
+                                                </btn>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+
+                                </table>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
         </div>
     </section>
+    <br>
     <section *ngIf="!loading">
-        <h2>Mensajes enviados</h2>
-        <div id="mensajesEnviados">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">N°</th>
-                        <th scope="col">Asunto</th>
-                        <th scope="col">Fecha</th>
-                        <th scope="col">Prestador</th>
-                        <th scope="col">Ver</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let item of mensajesEnviados.reverse(); let i = index">
-                        <th scope="row" class="align-middle col-1">{{i+1}}</th>
-                        <td class="align-middle col-4">{{item.asunto}}</td>
-                        <td class="align-middle col-3">{{item.createdAt}}</td>
-                        <td class="align-middle col-3">{{item.prestadore.usuario.nombre.charAt(0).toUpperCase() +
-                            item.prestadore.usuario.nombre.slice(1)}}
-                            {{item.prestadore.usuario.apellido.charAt(0).toUpperCase() +
-                            item.prestadore.usuario.apellido.slice(1)}}</td>
-                        <td class="align-middle col-1 ">
-                            <btn class="btn btn-outline-warning btn-sm text-dark" routerLink="">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"
-                                    class="bi bi-box-arrow-in-right" viewBox="0 0 16 16">
-                                    <path fill-rule="evenodd"
-                                        d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0v-2z" />
-                                    <path fill-rule="evenodd"
-                                        d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z" />
-                                </svg>
-                            </btn>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+        <div class="accordion" id="accordionMensajes">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingMensajes">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseMensajes" aria-expanded="true" aria-controls="collapseMensajes">
+                        <h2>Mensajes recibidos</h2>
+                    </button>
+                </h2>
+                <div id="collapseMensajes" class="accordion-collapse collapse" aria-labelledby="headingMensajes"
+                    data-bs-parent="#accordionMensajes">
+                    <div class="accordion-body">
+                        <div id="mensajesRecibidos">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">N°</th>
+                                            <th scope="col">Asunto</th>
+                                            <th scope="col">Mensaje</th>
+                                            <th scope="col">Fecha</th>
+                                            <th scope="col">Prestador</th>
+                                            <th scope="col"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let item of mensajesRecibidos.reverse(); let i = index">
+                                            <th class="align-middle col-1">{{ i + 1 }}</th>
+                                            <td class="align-middle col-1">{{ item.asunto }}</td>
+                                            <td class="align-middle col-5">{{ item.mensaje }}</td>
+                                            <td class="align-middle col-2">{{ item.createdAt }}</td>
+                                            <td class="align-middle col-2">
+                                                {{
+                                                item.prestadore.usuario.nombre.charAt(0).toUpperCase() +
+                                                item.prestadore.usuario.nombre.slice(1)
+                                                }}
+                                                {{
+                                                item.prestadore.usuario.apellido.charAt(0).toUpperCase() +
+                                                item.prestadore.usuario.apellido.slice(1)
+                                                }}
+                                            </td>
+                                            <td class="align-middle col-1">
+                                                <button class="btn btn-outline-danger btn-sm me-1" routerLink="">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                        fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+                                                        <path
+                                                            d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5" />
+                                                    </svg>
+                                                </button>
+                                                <button class="btn btn-outline-warning btn-sm text-dark">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                        fill="currentColor" class="bi bi-send" viewBox="0 0 16 16">
+                                                        <path
+                                                            d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576zm6.787-8.201L1.591 6.602l4.339 2.76 7.494-7.493Z" />
+                                                    </svg>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <br>
+    <section *ngIf="!loading">
+        <div class="accordion" id="accordionMensajesEnviados">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingMensajesEnviados">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseMensajesEnviados" aria-expanded="true"
+                        aria-controls="collapseMensajesEnviados">
+                        <h2>Mensajes enviados</h2>
+                    </button>
+                </h2>
+                <div id="collapseMensajesEnviados" class="accordion-collapse collapse"
+                    aria-labelledby="headingMensajesEnviados" data-bs-parent="#accordionMensajesEnviados">
+                    <div class="accordion-body">
+                        <div id="mensajesEnviados">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">N°</th>
+                                            <th scope="col">Asunto</th>
+                                            <th scope="col">Mensaje</th>
+                                            <th scope="col">Fecha</th>
+                                            <th scope="col">Prestador</th>
+                                            <th scope="col"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let item of mensajesEnviados.reverse(); let i = index">
+                                            <th class="align-middle col-1">{{ i + 1 }}</th>
+                                            <td class="align-middle col-1">{{ item.asunto }}</td>
+                                            <td class="align-middle col-5">{{ item.mensaje }}</td>
+                                            <td class="align-middle col-2">{{ item.createdAt }}</td>
+                                            <td class="align-middle col-2">
+                                                {{
+                                                item.prestadore.usuario.nombre.charAt(0).toUpperCase() +
+                                                item.prestadore.usuario.nombre.slice(1)
+                                                }}
+                                                {{
+                                                item.prestadore.usuario.apellido.charAt(0).toUpperCase() +
+                                                item.prestadore.usuario.apellido.slice(1)
+                                                }}
+                                            </td>
+                                            <td class="align-middle col-1">
+                                                <button class="btn btn-outline-danger btn-sm me-1" routerLink="">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                        fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+                                                        <path
+                                                            d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5" />
+                                                    </svg>
+                                                </button>
+                                                <button class="btn btn-outline-warning btn-sm text-dark">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                        fill="currentColor" class="bi bi-send" viewBox="0 0 16 16">
+                                                        <path
+                                                            d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576zm6.787-8.201L1.591 6.602l4.339 2.76 7.494-7.493Z" />
+                                                    </svg>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 </div>
@@ -136,19 +231,25 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Publicar trabajo</h1>
+                <h1 class="modal-title fs-5" id="exampleModalLabel">
+                    Publicar trabajo
+                </h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form id="publicarForm" [formGroup]="publicarForm">
                 <div class="modal-body">
-
                     <div class="mb-3">
                         <label for="nombre" class="form-label">Nombre del trabajo</label>
                         <input type="text" class="form-control" id="nombre" placeholder="Pintar el frente de mi casa"
-                            formControlName="nombre"
-                            [ngClass]="{ 'is-invalid': publicarForm.get('nombre')?.errors && publicarForm.get('nombre')?.touched }">
-                        <div class="text-danger text-center" formControlName="nombre"
-                            *ngIf="publicarForm.get('nombre')?.hasError('required') && publicarForm.get('nombre')?.touched">
+                            formControlName="nombre" [ngClass]="{
+                'is-invalid':
+                  publicarForm.get('nombre')?.errors &&
+                  publicarForm.get('nombre')?.touched
+              }" />
+                        <div class="text-danger text-center" formControlName="nombre" *ngIf="
+                publicarForm.get('nombre')?.hasError('required') &&
+                publicarForm.get('nombre')?.touched
+              ">
                             <li>Este campo es requerido</li>
                         </div>
                     </div>
@@ -156,57 +257,78 @@
                     <div>
                         <label for="fecha" class="form-label">Fecha</label>
                         <input type="date" class="form-control" id="fecha" placeholder="Ingrese la fecha"
-                            formControlName="fecha"
-                            [ngClass]="{ 'is-invalid': publicarForm.get('fecha')?.errors && publicarForm.get('fecha')?.touched }">
+                            formControlName="fecha" [ngClass]="{
+                'is-invalid':
+                  publicarForm.get('fecha')?.errors &&
+                  publicarForm.get('fecha')?.touched
+              }" />
                     </div>
 
-                    <div class="text-danger text-center" formControlName="fecha"
-                        *ngIf="publicarForm.get('fecha')?.hasError('required') && publicarForm.get('fecha')?.touched">
+                    <div class="text-danger text-center" formControlName="fecha" *ngIf="
+              publicarForm.get('fecha')?.hasError('required') &&
+              publicarForm.get('fecha')?.touched
+            ">
                         <li>Este campo es requerido</li>
                     </div>
 
                     <div>
                         <label for="lugar" class="form-label">Lugar</label>
                         <input type="text" class="form-control" id="lugar" placeholder="Ingrese el lugar"
-                            formControlName="lugar"
-                            [ngClass]="{ 'is-invalid': publicarForm.get('lugar')?.errors && publicarForm.get('lugar')?.touched }">
+                            formControlName="lugar" [ngClass]="{
+                'is-invalid':
+                  publicarForm.get('lugar')?.errors &&
+                  publicarForm.get('lugar')?.touched
+              }" />
                     </div>
 
-                    <div class="text-danger text-center" formControlName="lugar"
-                        *ngIf="publicarForm.get('lugar')?.hasError('required') && publicarForm.get('lugar')?.touched">
+                    <div class="text-danger text-center" formControlName="lugar" *ngIf="
+              publicarForm.get('lugar')?.hasError('required') &&
+              publicarForm.get('lugar')?.touched
+            ">
                         <li>Este campo es requerido</li>
                     </div>
 
                     <div>
                         <label for="rangoHorario" class="form-label">Rango Horario</label>
                         <input type="text" class="form-control" id="rangoHorario" placeholder="Ingrese el rango horario"
-                            formControlName="rangoHorario"
-                            [ngClass]="{ 'is-invalid': publicarForm.get('rangoHorario')?.errors && publicarForm.get('rangoHorario')?.touched }">
+                            formControlName="rangoHorario" [ngClass]="{
+                'is-invalid':
+                  publicarForm.get('rangoHorario')?.errors &&
+                  publicarForm.get('rangoHorario')?.touched
+              }" />
                     </div>
 
-                    <div class="text-danger text-center" formControlName="rangoHorario"
-                        *ngIf="publicarForm.get('rangoHorario')?.hasError('required') && publicarForm.get('rangoHorario')?.touched">
+                    <div class="text-danger text-center" formControlName="rangoHorario" *ngIf="
+              publicarForm.get('rangoHorario')?.hasError('required') &&
+              publicarForm.get('rangoHorario')?.touched
+            ">
                         <li>Este campo es requerido</li>
                     </div>
 
                     <div>
                         <label for="tareas" class="form-label">Tareas</label>
                         <textarea class="form-control" id="tareas" rows="3" placeholder="Ingrese las tareas"
-                            formControlName="tareas"
-                            [ngClass]="{ 'is-invalid': publicarForm.get('tareas')?.errors && publicarForm.get('tareas')?.touched }"></textarea>
+                            formControlName="tareas" [ngClass]="{
+                'is-invalid':
+                  publicarForm.get('tareas')?.errors &&
+                  publicarForm.get('tareas')?.touched
+              }"></textarea>
                     </div>
 
-                    <div class="text-danger text-center" formControlName="tareas"
-                        *ngIf="publicarForm.get('tareas')?.hasError('required') && publicarForm.get('tareas')?.touched">
+                    <div class="text-danger text-center" formControlName="tareas" *ngIf="
+              publicarForm.get('tareas')?.hasError('required') &&
+              publicarForm.get('tareas')?.touched
+            ">
                         <li>Este campo es requerido</li>
                     </div>
-
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Cerrar</button>
-                    <button type="button" (click)="publicar()" class="btn btn-warning " [disabled]="!publicarForm.valid"
+                    <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">
+                        Cerrar
+                    </button>
+                    <button type="button" (click)="publicar()" class="btn btn-warning" [disabled]="!publicarForm.valid"
                         data-bs-dismiss="modal">
-                        <div class="text-black">Confirmar</div>
+                        <div class="text-black">Publicar</div>
                     </button>
                 </div>
             </form>

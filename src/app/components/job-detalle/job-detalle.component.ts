@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from 'src/app/services/api.service';
 import { ITrabajo } from 'src/app/models/trabajo';
 import { IToken } from 'src/app/models/token';
+import { ICalificacion } from 'src/app/models/calificacion';
 
 @Component({
   selector: 'app-job-detalle',
@@ -33,19 +34,30 @@ export class JobDetalleComponent implements OnInit {
       nombre: ''
     },
     calificacionId: null,
+    calificacione: {
+      id: 0,
+      estrellas: 0,
+      comentario: ''
+    }
   }
   trabajoDisponible!: boolean
   trabajoEsMioConsumidor!: boolean
   trabajoEsMioPrestador!: boolean
   trabajoNuevoEstado!: string
   formAsignarPrestador!: FormGroup
+  formDarCalificacion!: FormGroup
   mostrarAsignarPrestador: boolean = false
+  mostrarDarCalificacion: boolean = false
   idPrestadorAsignado: string = ''
+  
+
   constructor(
     private _apiService: ApiService,
     private fb: FormBuilder
   ) {
     this.formAsignarPrestador = this.fb.group({
+    }),
+    this.formDarCalificacion = this.fb.group({
     })
   }
 
@@ -74,26 +86,6 @@ export class JobDetalleComponent implements OnInit {
       }
     });
 
-    this._apiService.getTrabajosByConsumidor(this.token).subscribe({
-      next: (data: ITrabajo[]) => {
-        if (data.length > 0) {
-          this.trabajoEsMioConsumidor = true;
-        }
-        this.loading = false;
-      },
-      error: (error: any) => {
-        const alertElement = document.createElement('div');
-        alertElement.className = 'alert alert-warning container text-center fs-5';
-        alertElement.innerText = error.error.msg;
-        document.body.appendChild(alertElement);
-        console.error(error);
-        this.loading = false;
-        setTimeout(() => {
-          alertElement.remove();
-        }, 4000);
-
-      }
-    })
 
     this._apiService.esMiTrabajoConsumidor(this.token, this.id).subscribe({
       next: (data: any) => {
@@ -120,16 +112,7 @@ export class JobDetalleComponent implements OnInit {
         this.loading = false;
       },
       error: (error: any) => {
-        const alertElement = document.createElement('div');
-        alertElement.className = 'alert alert-warning container text-center fs-5';
-        alertElement.innerText = error.error.msg;
-        document.body.prepend(alertElement);
         console.error(error);
-        this.loading = false;
-        setTimeout(() => {
-          alertElement.remove();
-        }, 4000);
-
       }
     })
 
@@ -139,18 +122,27 @@ export class JobDetalleComponent implements OnInit {
     window.history.back();
   }
 
-  mostrarFormAsignarPrestador() {
+  mostrarForm() {
     this.trabajoNuevoEstado = (<HTMLSelectElement>document.getElementById('estadoTrabajoNuevo')).value;
-    this.formAsignarPrestador = this.fb.group({
-      prestadorId: ['', Validators.required]
-    })
     if (this.trabajoNuevoEstado == '1') {
       this.mostrarAsignarPrestador = true;
+      this.formAsignarPrestador = this.fb.group({
+        prestadorId: ['', Validators.required]
+      })
     } else {
       this.formAsignarPrestador = this.fb.group({
         prestadorId: ['']
       })
       this.mostrarAsignarPrestador = false;
+    }
+    if (this.trabajoNuevoEstado == '5') {
+      this.mostrarDarCalificacion = true;
+      this.formDarCalificacion = this.fb.group({
+        estrellas: ['', Validators.required],
+        comentario: ['']
+      })
+    } else {
+      this.mostrarDarCalificacion = false;
     }
   }
   cambiarEstado() {
@@ -211,4 +203,34 @@ export class JobDetalleComponent implements OnInit {
     })
   }
 
+  darCalificacion() {
+    const estrellas = Number((<HTMLSelectElement>document.getElementById('darCalificacion')).value);
+    const comentario = (<HTMLInputElement>document.getElementById('comentario')).value;
+
+    this._apiService.postCalificacion(this.id, this.token, estrellas, comentario).subscribe({
+      next: (data: any) => {
+        setTimeout(() => {
+          scrollTo(0, 0);
+          const alertElement = document.createElement('div');
+          alertElement.className = 'alert alert-success container text-center fs-5';
+          alertElement.innerText = data.msg;
+          document.getElementById('alert')?.appendChild(alertElement);
+        }, 3000);
+        this.cambiarEstado();
+      },
+      error: (error: any) => {
+        scrollTo(0, 0);
+        const alertElement = document.createElement('div');
+        alertElement.className = 'alert alert-warning container text-center fs-5';
+        alertElement.innerText = error.error.msg;
+        document.getElementById('alert')?.appendChild(alertElement);
+        setTimeout(() => {
+          alertElement.remove();
+        }, 5000);
+
+      }
+    })
+  }
+
 }
+
