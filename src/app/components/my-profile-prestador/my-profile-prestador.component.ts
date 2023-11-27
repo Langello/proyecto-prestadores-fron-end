@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ITrabajo } from 'src/app/models/trabajo';
+import { IPrestador } from 'src/app/models/prestador';
 import { ApiService } from 'src/app/services/api.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -23,6 +24,7 @@ export class MyProfilePrestadorComponent implements OnInit {
   }
   publicarForm!: FormGroup;
   prestadorId: string = '';
+  prestador!: IPrestador;
 
   constructor(private _apiService: ApiService,
     private fb: FormBuilder,
@@ -73,7 +75,15 @@ export class MyProfilePrestadorComponent implements OnInit {
     this._apiService.getPrestadorIdByToken(this.token).subscribe({
       next: (data: any) => {
         this.prestadorId = data;
-        this.loading = false;
+        this._apiService.getPrestador(this.prestadorId).subscribe({
+          next: (data: any) => {
+            this.prestador = data;
+            this.loading = false;
+          },
+          error: (error: any) => {
+            console.error(error);
+          }
+        })
       },
       error: (error: any) => {
         console.error(error);

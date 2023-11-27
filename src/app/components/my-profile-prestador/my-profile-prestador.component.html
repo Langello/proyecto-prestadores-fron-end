@@ -189,4 +189,57 @@
             </div>
         </div>
     </section>
+    <br>
+    <section *ngIf="!loading">
+        <div class="accordion" id="accordionCuentaPrestador">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingCuentaPrestador">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseCuentaPrestador" aria-expanded="true"
+                        aria-controls="collapseCuentaMetodoPago">
+                        <h2>Cuenta</h2>
+                    </button>
+                </h2>
+                <div id="collapseCuentaPrestador" class="accordion-collapse collapse"
+                    aria-labelledby="headingCuentaPrestador" data-bs-parent="#accordionCuentaPrestador">
+                    <div class="accordion-body">
+                        <form>
+                            <div class="mb-3">
+                                <label for="cuilCuit" class="form-label">CUIL/CUIT</label>
+                                <input readonly type="text" class="form-control" id="cuilCuit" name="cuilCuit" value="{{prestador.cuilCuit}}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="descripcion" class="form-label">Descripción del Prestador</label>
+                                <textarea class="form-control" id="descripcion" rows="3" name="descripcion"
+                                    placeholder="Ingrese la descripción del prestador">{{prestador.descripcion}}</textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="fotosTrabajos" class="form-label">Fotos de Trabajos Realizados</label>
+                                <input type="text" class="form-control" id="fotosTrabajos" name="fotosTrabajos" value="{{prestador.fotosTrabajosRealizados}}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="horariosAtencion" class="form-label">Horarios de Atención</label>
+                                <input type="text" class="form-control" id="horariosAtencion" name="horariosAtencion"
+                                    placeholder="Ingrese los horarios de atención" value="">
+                            </div>
+                            <div class="mb-3">
+                                <label for="disponibilidad" class="form-label">Disponibilidad</label>
+                                <select class="form-select" id="disponibilidad" name="disponibilidad">
+                                    <option selected value="{{prestador.disponibilidad}}">{{prestador.disponibilidad ? 'Disponible' : 'No disponible'}}</option>
+                                    <option *ngIf="!prestador.disponibilidad" value="true">Disponible</option>
+                                    <option *ngIf="prestador.disponibilidad" value="false">No disponible</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="radioCobertura" class="form-label">Radio de Cobertura</label>
+                                <input type="text" class="form-control" id="radioCobertura" name="radioCobertura"
+                                    placeholder="Ingrese el radio de cobertura" value="{{prestador.radioCobertura}}">
+                            </div>
+                            <button type="submit" class="btn btn-warning">Guardar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 </div>

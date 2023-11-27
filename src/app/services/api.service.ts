@@ -28,7 +28,13 @@ export class ApiService {
   }
 
   public getConsumidor(id: string): Observable<IConsumidor> {
+    console.log(id);
+    console.log(`${this.urlBase}/consumidor/${id}`);
     return this._httpClient.get<IConsumidor>(`${this.urlBase}/consumidor/${id}`);
+  }
+
+  public getConsumidorIdByToken (token: IToken): Observable<IConsumidor> {
+    return this._httpClient.get<IConsumidor>(`${this.urlBase}/consumidor-id/${token.token}`);
   }
 
   public getUsuario(token: IToken): Observable<IUsuario> {

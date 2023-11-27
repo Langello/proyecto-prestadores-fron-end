@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ITrabajo } from 'src/app/models/trabajo';
 import { ApiService } from 'src/app/services/api.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { IConsumidor } from 'src/app/models/consumidor';
 import { Router } from '@angular/router';
 import { IToken } from 'src/app/models/token';
 
@@ -20,11 +21,12 @@ export class MyProfileConsumidorComponent implements OnInit {
     token: localStorage.getItem('token') || ''
   }
   publicarForm!: FormGroup;
+  idConsumidor: string = '';
+  consumidor!: IConsumidor;
 
   constructor(private _apiService: ApiService,
     private fb: FormBuilder,
     private _router: Router
-
   ) { }
 
   ngOnInit(): void {
@@ -76,6 +78,26 @@ export class MyProfileConsumidorComponent implements OnInit {
         console.error(error);
       }
     })
+
+    this._apiService.getConsumidorIdByToken(this.token).subscribe({
+      next: (data: any) => {
+        this.idConsumidor = data;
+        this._apiService.getConsumidor(this.idConsumidor).subscribe({
+          next: (data: IConsumidor) => {
+            this.consumidor = data;
+            this.loading = false;
+          },
+          error: (error: any) => {
+            console.error(error);
+          }
+        })
+        
+      },
+      error: (error: any) => {
+        console.error(error);
+      }
+    })
+
   }
 
   publicar() {
