@@ -35,6 +35,10 @@
             <h5>Estado</h5>
             <p>{{trabajo.estado.nombre}}</p>
         </div>
+        <div *ngIf="trabajo.prestadore" class="col-8 offset-2">
+            <h5>Prestador asignado</h5>
+            <p>{{trabajo.prestadore.usuario?.apellido}}&nbsp;{{trabajo.prestadore.usuario?.nombre}}</p>
+        </div>
         <div *ngIf="trabajo.calificacione" class="col-8 offset-2">
             <h5>Calificacion</h5>
             <p>{{trabajo.calificacione.estrellas}}</p>

@@ -247,7 +247,7 @@
                             <div class="text-danger" formControlName="metodoPago" *ngIf=" cuentaForm.get('metodoPago')?.errors && cuentaForm.get('metodoPago')?.touched">
                                 <li>Este campo es requerido</li>
                             </div>
-                            <button type="submit" class="btn btn-warning mt-3" [disabled]="!cuentaForm.valid">Guardar</button>
+                            <button type="submit" class="btn btn-warning mt-3" [disabled]="!cuentaForm.valid" (click)="guardarCuenta()">Guardar</button>
                         </form>
                     </div>
                 </div>

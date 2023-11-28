@@ -31,7 +31,7 @@ export class MyProfileConsumidorComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    
+
 
     this.publicarForm = this.fb.group({
       nombre: ['', Validators.required],
@@ -95,7 +95,7 @@ export class MyProfileConsumidorComponent implements OnInit {
             console.error(error);
           }
         })
-        
+
       },
       error: (error: any) => {
         console.error(error);
@@ -145,6 +145,34 @@ export class MyProfileConsumidorComponent implements OnInit {
           alertElement.remove();
         }, 4000);
       }
+    });
+
+  }
+
+  guardarCuenta() {
+    this._apiService.putConsumidor(this.token, this.cuentaForm.value,).subscribe({
+      next: (data: any) => {
+        this._router.navigate(['/my-profile-consumer']);
+        const alertElement = document.createElement('div');
+        alertElement.className = 'alert alert-success container text-center fs-5 mt-1 mx-auto w-50';
+        alertElement.innerText = data.msg;
+        document.getElementById('alert')?.appendChild(alertElement);
+        setTimeout(() => {
+          alertElement.remove();
+        }, 4000);
+      },
+      error: (error: any) => {
+        const alertElement = document.createElement('div');
+        alertElement.className = 'alert alert-warning container text-center fs-5 mt-1 mx-auto w-50';
+        alertElement.innerText = error.error.msg;
+        document.getElementById('alert')?.appendChild(alertElement);
+        console.error(error);
+        this.loading = false;
+        setTimeout(() => {
+          alertElement.remove();
+        }, 4000);
+      }
+
     });
 
   }

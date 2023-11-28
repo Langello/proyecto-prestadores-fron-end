@@ -216,40 +216,40 @@
                                 <input readonly type="text" class="form-control" id="cuilCuit" name="cuilCuit"
                                     value="{{prestador.cuilCuit}}" formControlName="cuilCuit" [ngClass]="{ 'is-invalid': cuentaForm.get('cuilCuit')?.touched }">
                             </div>
-                            <div class="text-danger mb-3" formControlName="cuilCuit" *ngIf="cuentaForm.get('cuilCuit')?.touched">
+                            <div class="text-danger" formControlName="cuilCuit" *ngIf="cuentaForm.get('cuilCuit')?.touched">
                                 <li>Este campo no se puede modificar</li>
                             </div>
                             <div>
-                                <label for="descripcion" class="form-label">Descripción del Prestador</label>
+                                <label for="descripcion" class="form-label mt-3">Descripción del Prestador</label>
                                 <textarea class="form-control" id="descripcion" rows="3" name="descripcion"
                                     placeholder="Ingrese la descripción del prestador" formControlName="descripcion"
                                     [ngClass]="{ 'is-invalid': cuentaForm.get('descripcion')?.errors &&  cuentaForm.get('descripcion')?.touched  }">
                                     {{prestador.descripcion}}
                                 </textarea>
                             </div>
-                            <div class="text-danger mb-3" formControlName="descripcion" *ngIf=" cuentaForm.get('descripcion')?.errors && cuentaForm.get('descripcion')?.touched">
+                            <div class="text-danger" formControlName="descripcion" *ngIf=" cuentaForm.get('descripcion')?.errors && cuentaForm.get('descripcion')?.touched">
                                 <li>Este campo es requerido</li>
                             </div>
                             <div>
-                                <label for="fotosTrabajos" class="form-label">Fotos de Trabajos Realizados</label>
+                                <label for="fotosTrabajos" class="form-label mt-3">Fotos de Trabajos Realizados</label>
                                 <input type="text" class="form-control" id="fotosTrabajos" name="fotosTrabajos"
                                     value="{{prestador.fotosTrabajosRealizados}}"
                                     formControlName="fotosTrabajosRealizados" [ngClass]="{ 'is-invalid': cuentaForm.get('fotosTrabajosRealizados')?.errors &&  cuentaForm.get('fotosTrabajosRealizados')?.touched  }">
                             </div>
-                            <div class="mb-3 text-danger" formControlName="fotosTrabajosRealizados" *ngIf=" cuentaForm.get('fotosTrabajosRealizados')?.errors && cuentaForm.get('fotosTrabajosRealizados')?.touched">
+                            <div class="text-danger" formControlName="fotosTrabajosRealizados" *ngIf=" cuentaForm.get('fotosTrabajosRealizados')?.errors && cuentaForm.get('fotosTrabajosRealizados')?.touched">
                                 <li>Este campo es requerido</li>
                             </div>
                             <div>
-                                <label for="horariosAtencion" class="form-label">Horarios de Atención</label>
+                                <label for="horariosAtencion" class="form-label mt-3">Horarios de Atención</label>
                                 <input type="text" class="form-control" id="horariosAtencion" name="horariosAtencion"
                                     placeholder="Ingrese los horarios de atención"
                                     value="{{prestador.horariosAtencion}}" formControlName="horariosAtencion" [ngClass]="{ 'is-invalid': cuentaForm.get('horariosAtencion')?.touched }">
                             </div>
-                            <div class="mb-3 text-danger" formControlName="horariosAtencion" *ngIf=" cuentaForm.get('horariosAtencion')?.errors && cuentaForm.get('horariosAtencion')?.touched">
+                            <div class="text-danger" formControlName="horariosAtencion" *ngIf=" cuentaForm.get('horariosAtencion')?.errors && cuentaForm.get('horariosAtencion')?.touched">
                                 <li>Este campo es requerido</li>
                             </div>
                             <div>
-                                <label for="disponibilidad" class="form-label">Disponibilidad</label>
+                                <label for="disponibilidad" class="form-label mt-3">Disponibilidad</label>
                                 <select class="form-select" id="disponibilidad" name="disponibilidad"
                                     formControlName="disponibilidad">
                                     <option selected value="{{prestador.disponibilidad}}">{{prestador.disponibilidad ?
@@ -259,15 +259,15 @@
                                 </select>
                             </div>
                             <div>
-                                <label for="radioCobertura" class="form-label">Radio de Cobertura</label>
+                                <label for="radioCobertura" class="form-label mt-3">Radio de Cobertura</label>
                                 <input type="text" class="form-control" id="radioCobertura" name="radioCobertura"
                                     placeholder="Ingrese el radio de cobertura" value="{{prestador.radioCobertura}}"
                                     formControlName="radioCobertura" [ngClass]="{ 'is-invalid': cuentaForm.get('radioCobertura')?.touched }">
                             </div>
-                            <div class="mb-3 text-danger" formControlName="radioCobertura" *ngIf=" cuentaForm.get('radioCobertura')?.errors && cuentaForm.get('radioCobertura')?.touched">
+                            <div class="text-danger" formControlName="radioCobertura" *ngIf=" cuentaForm.get('radioCobertura')?.errors && cuentaForm.get('radioCobertura')?.touched">
                                 <li>Este campo es requerido</li>
                             </div>
-                            <button type="submit" class="btn btn-warning"
+                            <button type="submit" class="btn btn-warning mt-3" (click)="guardarCuenta()"
                                 [disabled]="!cuentaForm.valid">Guardar</button>
                         </form>
                     </div>

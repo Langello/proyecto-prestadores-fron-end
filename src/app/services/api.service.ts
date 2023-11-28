@@ -37,6 +37,10 @@ export class ApiService {
     return this._httpClient.get<IConsumidor>(`${this.urlBase}/consumidor-id/${token.token}`);
   }
 
+  public putConsumidor(token: IToken, consumidor: IConsumidor): Observable<any> {
+	return this._httpClient.put<any>(`${this.urlBase}/consumidor`, { ...consumidor, ...token });
+  }
+
   public getUsuario(token: IToken): Observable<IUsuario> {
     return this._httpClient.get<IUsuario>(`${this.urlBase}/usuario/${token.token}`);
   }
@@ -59,6 +63,10 @@ export class ApiService {
 
   public getPrestadorIdByToken (token: IToken): Observable<IPrestador> {
     return this._httpClient.get<IPrestador>(`${this.urlBase}/prestador-id/${token.token}`);
+  }
+
+  public putPrestador(token: IToken, prestador: IPrestador): Observable<any> {
+    return this._httpClient.put<any>(`${this.urlBase}/prestador`, { ...prestador, ...token });
   }
 
   public postConsumidor(consumidor: IConsumidor, token: IToken): Observable<IConsumidor> {

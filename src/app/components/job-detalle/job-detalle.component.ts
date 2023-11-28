@@ -5,6 +5,7 @@ import { ApiService } from 'src/app/services/api.service';
 import { ITrabajo } from 'src/app/models/trabajo';
 import { IToken } from 'src/app/models/token';
 import { ICalificacion } from 'src/app/models/calificacion';
+import { IPrestador } from 'src/app/models/prestador';
 
 @Component({
   selector: 'app-job-detalle',
@@ -38,7 +39,7 @@ export class JobDetalleComponent implements OnInit {
       id: 0,
       estrellas: 0,
       comentario: ''
-    }
+    },
   }
   trabajoDisponible!: boolean
   trabajoEsMioConsumidor!: boolean

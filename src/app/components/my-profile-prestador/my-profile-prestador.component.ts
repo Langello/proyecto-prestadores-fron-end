@@ -34,7 +34,7 @@ export class MyProfilePrestadorComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    
+
 
     this.publicarForm = this.fb.group({
       nombre: ['', Validators.required],
@@ -73,7 +73,7 @@ export class MyProfilePrestadorComponent implements OnInit {
       }
     })
 
-    
+
 
     this._apiService.getPrestadorIdByToken(this.token).subscribe({
       next: (data: any) => {
@@ -83,11 +83,11 @@ export class MyProfilePrestadorComponent implements OnInit {
             this.prestador = data;
             this.cuentaForm = this.fb.group({
               cuilCuit: [data.cuilCuit, Validators.required],
-              descripcion: [ data.descripcion, Validators.required],
-              fotosTrabajosRealizados: [ data.fotosTrabajosRealizados, Validators.required],
-              horariosAtencion: [ data.horariosAtencion, Validators.required],
-              disponibilidad: [ data.disponibilidad, Validators.required],
-              radioCobertura: [ data.radioCobertura, Validators.required],
+              descripcion: [data.descripcion, Validators.required],
+              fotosTrabajosRealizados: [data.fotosTrabajosRealizados, Validators.required],
+              horariosAtencion: [data.horariosAtencion, Validators.required],
+              disponibilidad: [data.disponibilidad, Validators.required],
+              radioCobertura: [data.radioCobertura, Validators.required],
             })
             this.loading = false;
           },
@@ -154,6 +154,34 @@ export class MyProfilePrestadorComponent implements OnInit {
         }, 4000);
       }
     });
+
+  }
+
+  guardarCuenta() {
+    window.scrollTo(0, 0);
+    this._apiService.putPrestador(this.token, this.cuentaForm.value).subscribe({
+      next: (data: any) => {
+        const alertElement = document.createElement('div');
+        alertElement.className = 'alert alert-success container text-center fs-5 mt-1 mx-auto w-50';
+        alertElement.innerText = data.msg;
+        document.getElementById('alert')?.appendChild(alertElement);
+        setTimeout(() => {
+          alertElement.remove();
+        }, 4000);
+      },
+      error: (error: any) => {
+        const alertElement = document.createElement('div');
+        alertElement.className = 'alert alert-warning container text-center fs-5 mt-1 mx-auto w-50';
+        alertElement.innerText = error.error.msg;
+        document.getElementById('alert')?.appendChild(alertElement);
+        console.error(error);
+        this.loading = false;
+        setTimeout(() => {
+          alertElement.remove();
+        }, 4000);
+      }
+    });
+
 
   }
 
