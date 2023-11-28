@@ -1,26 +1,35 @@
 <div *ngIf="loading">
     <div class="d-flex justify-content-center align-items-center">
-        <div class="spinner-border text-warning" style="width: 4rem; height: 4rem; margin: 5rem ;"  aria-hidden="true"></div>
+        <div class="spinner-border text-warning" style="width: 4rem; height: 4rem; margin: 5rem ;" aria-hidden="true">
+        </div>
     </div>
 </div>
 <div *ngIf="!loading" class="bg-body-tertiary">
     <div class="container">
         <h1 class="text-center">Prestadores de Servicios</h1>
         <div class="row justify-content-center">
-            <div *ngFor="let item of listaPrestadores" class="card">
+           <div *ngFor="let item of listaPrestadores; let i = index" class="card">
                 <a class="text-decoration-none" routerLink="/prestador/{{item.id}}">
-                <img src="{{item.fotosTrabajosRealizados}}"
-                    class="card-img-top" alt="imagen del profesional">
-                <div class="card-body">
-                    <h5 class="card-title text-dark">{{item.usuario?.nombre}} {{item.usuario?.apellido}}</h5>
-                    <p class="card-text text-dark">{{item.descripcion}}</p>
-                </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">{{item.horariosAtencion}}</li>
-                    <li class="list-group-item text-success" *ngIf="item.disponibilidad">Disponible</li>
-                    <li class="list-group-item text-danger" *ngIf="!item.disponibilidad">No disponible</li>
-                </ul>
-            </a>
+                    <img src="{{item.fotosTrabajosRealizados}}" class="card-img-top" alt="imagen del profesional">
+                    <div class="card-body">
+                        <div *ngIf="item.promedioCalificacion">
+                            <div *ngFor="let star of [item.promedioCalificacion]" class="card-text fs-5">
+                                <span *ngIf="star >= 1">⭐</span>
+                                <span *ngIf="star >= 2">⭐</span>
+                                <span *ngIf="star >= 3">⭐</span>
+                                <span *ngIf="star >= 4">⭐</span>
+                                <span *ngIf="star >= 5">⭐</span>
+                            </div>
+                        </div>
+                        <h5 class="card-title text-dark">{{item.usuario?.nombre}} {{item.usuario?.apellido}}</h5>
+                        <p class="card-text text-dark">{{item.descripcion}}</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">{{item.horariosAtencion}}</li>
+                        <li class="list-group-item text-success" *ngIf="item.disponibilidad">Disponible</li>
+                        <li class="list-group-item text-danger" *ngIf="!item.disponibilidad">No disponible</li>
+                    </ul>
+                </a>
             </div>
         </div>
     </div>

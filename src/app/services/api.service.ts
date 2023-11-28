@@ -112,6 +112,10 @@ export class ApiService {
     return this._httpClient.delete<any>(`${this.urlBase}/mensaje-prestador-enviado/${token.token}`, { body: { id } });
   }
 
+  public getPromedioCalificacionPrestador (id: string): Observable<any> {
+    return this._httpClient.get<any>(`${this.urlBase}/promedio-calificacion/${id}`);
+  }
+
   public getRoles(token: IToken): Observable<any> {
     return this._httpClient.post<any>(`${this.urlBase}/roles`, token);
   }
