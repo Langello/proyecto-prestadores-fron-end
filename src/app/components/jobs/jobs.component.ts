@@ -19,7 +19,7 @@ export class JobsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    document.body.style.overflowY = 'scroll';
+    
     this._apiService.getTrabajos("").subscribe({
       next: (data: ITrabajo[]) => {
         console.log(data);

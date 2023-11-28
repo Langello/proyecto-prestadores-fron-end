@@ -19,7 +19,7 @@ export class ProfesionalesComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    document.body.style.overflowY = 'scroll';
+    
     this._apiService.getPrestadores("").subscribe({
       next: (data: IPrestador[]) => {
         this.listaPrestadores = data;

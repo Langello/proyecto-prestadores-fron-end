@@ -1,6 +1,8 @@
 body {
   margin-bottom: 3rem !important; /* Footer height */
   background-color: #f8f9fa !important; /* Fallback color */
+  overflow-y: scroll !important; /* Hide vertical scrollbar */
+  padding-right: 0px !important; /* Remove right padding */
 }
 /* Estilos personalizados para quitar el borde azul al enfocar y cambiar a borde amarillo al hacer clic */
 input:focus,

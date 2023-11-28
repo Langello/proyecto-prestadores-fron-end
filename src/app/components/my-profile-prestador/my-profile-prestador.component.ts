@@ -25,6 +25,7 @@ export class MyProfilePrestadorComponent implements OnInit {
   publicarForm!: FormGroup;
   prestadorId: string = '';
   prestador!: IPrestador;
+  cuentaForm!: FormGroup;
 
   constructor(private _apiService: ApiService,
     private fb: FormBuilder,
@@ -33,7 +34,7 @@ export class MyProfilePrestadorComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    document.body.style.overflowY = 'scroll';
+    
 
     this.publicarForm = this.fb.group({
       nombre: ['', Validators.required],
@@ -72,12 +73,22 @@ export class MyProfilePrestadorComponent implements OnInit {
       }
     })
 
+    
+
     this._apiService.getPrestadorIdByToken(this.token).subscribe({
       next: (data: any) => {
         this.prestadorId = data;
         this._apiService.getPrestador(this.prestadorId).subscribe({
           next: (data: any) => {
             this.prestador = data;
+            this.cuentaForm = this.fb.group({
+              cuilCuit: [data.cuilCuit, Validators.required],
+              descripcion: [ data.descripcion, Validators.required],
+              fotosTrabajosRealizados: [ data.fotosTrabajosRealizados, Validators.required],
+              horariosAtencion: [ data.horariosAtencion, Validators.required],
+              disponibilidad: [ data.disponibilidad, Validators.required],
+              radioCobertura: [ data.radioCobertura, Validators.required],
+            })
             this.loading = false;
           },
           error: (error: any) => {

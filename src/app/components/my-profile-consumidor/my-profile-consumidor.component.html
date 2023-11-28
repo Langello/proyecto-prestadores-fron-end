@@ -238,19 +238,23 @@
                 <div id="collapseCuentaMetodoPago" class="accordion-collapse collapse"
                     aria-labelledby="headingCuentaMetodoPago" data-bs-parent="#accordionCuentaMetodoPago">
                     <div class="accordion-body">
-                        <form>
-                            <div class="mb-3">
+                        <form [formGroup]="cuentaForm">
+                            <div>
                                 <label for="metodoPago" class="form-label">Método de pago</label>
-                                <input type="text" class="form-control" id="metodoPago" name="metodoPago" value="{{consumidor.metodoPago}}">
+                                <input type="text" class="form-control" id="metodoPago" name="metodoPago"
+                                    value="{{consumidor.metodoPago}}" formControlName="metodoPago" [ngClass]="{ 'is-invalid': cuentaForm.get('metodoPago')?.errors &&  cuentaForm.get('metodoPago')?.touched  }">
                             </div>
-                            <button type="submit" class="btn btn-warning">Guardar</button>
+                            <div class="text-danger" formControlName="metodoPago" *ngIf=" cuentaForm.get('metodoPago')?.errors && cuentaForm.get('metodoPago')?.touched">
+                                <li>Este campo es requerido</li>
+                            </div>
+                            <button type="submit" class="btn btn-warning mt-3" [disabled]="!cuentaForm.valid">Guardar</button>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    
+
 </div>
 
 

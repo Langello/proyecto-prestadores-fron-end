@@ -23,6 +23,7 @@ export class MyProfileConsumidorComponent implements OnInit {
   publicarForm!: FormGroup;
   idConsumidor: string = '';
   consumidor!: IConsumidor;
+  cuentaForm!: FormGroup;
 
   constructor(private _apiService: ApiService,
     private fb: FormBuilder,
@@ -30,7 +31,7 @@ export class MyProfileConsumidorComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    document.body.style.overflowY = 'scroll';
+    
 
     this.publicarForm = this.fb.group({
       nombre: ['', Validators.required],
@@ -85,6 +86,9 @@ export class MyProfileConsumidorComponent implements OnInit {
         this._apiService.getConsumidor(this.idConsumidor).subscribe({
           next: (data: IConsumidor) => {
             this.consumidor = data;
+            this.cuentaForm = this.fb.group({
+              metodoPago: [data.metodoPago, Validators.required],
+            })
             this.loading = false;
           },
           error: (error: any) => {
