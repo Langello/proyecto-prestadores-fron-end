@@ -30,7 +30,8 @@ const routes: Routes = [
   { path: 'help', component: AyudaComponent },
   { path: 'my-profile-consumer', component: MiPerfilConsumidorComponent },
   { path: 'my-profile-provider', component: MiPerfilPrestadorComponent }, 
-  { path: '**', redirectTo: 'home' },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: '**', redirectTo: 'home', pathMatch: 'full' },
 
 ];
 

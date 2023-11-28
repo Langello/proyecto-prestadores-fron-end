@@ -9,9 +9,9 @@
       </svg>
     </a>
     <a class="navbar-brand" routerLink="/home">
+      <b>Pro Service</b>
       <img src="https://icongr.am/material/hammer.svg?size=148&color=c0822a" alt="Logo" width="44" height="40"
         class="d-inline-block align-text-center">
-      <b>Pro Service</b>
     </a>
   </div>
 </nav>
@@ -44,6 +44,17 @@
       <button *ngIf="perfilPrestador" type="button" class="btn btn-warning text-start text-dark list-group-item"
         routerLinkActive="ruta-activa" routerLink="/my-profile-provider">
         Mi perfil de prestador
+      </button>
+
+      <button *ngIf="!perfilConsumidor && cuenta" type="button" class="btn btn-warning text-start text-dark list-group-item"
+      routerLinkActive="ruta-activa" routerLink="/modal-select">
+        Crear perfil de consumidor
+      </button>
+
+
+      <button *ngIf="!perfilPrestador && cuenta" type="button" class="btn btn-warning text-start text-dark list-group-item"
+        routerLinkActive="ruta-activa" routerLink="/modal-select">
+        Crear perfil de prestador
       </button>
 
 

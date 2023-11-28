@@ -182,7 +182,62 @@ export class MyProfilePrestadorComponent implements OnInit {
       }
     });
 
+  }
 
+  borrarMensajeRecibido(id: string) {
+    this.loading = true;
+    window.scrollTo(0, 0);
+    this._apiService.deleteTrabajoPrestadorRecibido(id, this.token).subscribe({
+      next: (data: any) => {
+        this.ngOnInit();
+        const alertElement = document.createElement('div');
+        alertElement.className = 'alert alert-success container text-center fs-5 mt-1 mx-auto w-50';
+        alertElement.innerText = data.msg;
+        document.getElementById('alert')?.appendChild(alertElement);
+        setTimeout(() => {
+          alertElement.remove();
+        }, 4000);
+      },
+      error: (error: any) => {
+        const alertElement = document.createElement('div');
+        alertElement.className = 'alert alert-warning container text-center fs-5 mt-1 mx-auto w-50';
+        alertElement.innerText = error.error.msg;
+        document.getElementById('alert')?.appendChild(alertElement);
+        console.error(error);
+        this.loading = false;
+        setTimeout(() => {
+          alertElement.remove();
+        }, 4000);
+      }
+    });
+  }
+
+  borrarMensajeEnviado(id: string) {
+    this.loading = true;
+    window.scrollTo(0, 0);
+    this._apiService.deleteTrabajoPrestadorEnviado(id, this.token).subscribe({
+      next: (data: any) => {
+        this.ngOnInit();
+        const alertElement = document.createElement('div');
+        alertElement.className = 'alert alert-success container text-center fs-5 mt-1 mx-auto w-50';
+        alertElement.innerText = data.msg;
+        document.getElementById('alert')?.appendChild(alertElement);
+        setTimeout(() => {
+          alertElement.remove();
+        }, 4000);
+      },
+      error: (error: any) => {
+        const alertElement = document.createElement('div');
+        alertElement.className = 'alert alert-warning container text-center fs-5 mt-1 mx-auto w-50';
+        alertElement.innerText = error.error.msg;
+        document.getElementById('alert')?.appendChild(alertElement);
+        console.error(error);
+        this.loading = false;
+        setTimeout(() => {
+          alertElement.remove();
+        }, 4000);
+      }
+    });
   }
 
 }

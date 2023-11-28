@@ -84,16 +84,32 @@ export class ApiService {
     return this._httpClient.get<any>(`${this.urlBase}/mensaje-consumidor-recibido/${token.token}`);
   }
 
+  public deleteTrabajoConsumidorRecibido (id: string, token: IToken): Observable<any> {
+    return this._httpClient.delete<any>(`${this.urlBase}/mensaje-consumidor-recibido/${token.token}`, { body: { id } });
+  }
+
+  public getMensajeConsumidorEnviado (token: IToken): Observable<any> {
+    return this._httpClient.get<any>(`${this.urlBase}/mensaje-consumidor-enviado/${token.token}`);
+  }
+
+  public deleteTrabajoConsumidorEnviado (id: string, token: IToken): Observable<any> {
+    return this._httpClient.delete<any>(`${this.urlBase}/mensaje-consumidor-enviado/${token.token}`, { body: { id } });
+  }
+
   public getMensajePrestadorRecibido (token: IToken): Observable<any> {
     return this._httpClient.get<any>(`${this.urlBase}/mensaje-prestador-recibido/${token.token}`);
+  }
+
+  public deleteTrabajoPrestadorRecibido (id: string, token: IToken): Observable<any> {
+    return this._httpClient.delete<any>(`${this.urlBase}/mensaje-prestador-recibido/${token.token}`, { body: { id } });
   }
 
   public getMensajePrestadorEnviado (token: IToken): Observable<any> {
     return this._httpClient.get<any>(`${this.urlBase}/mensaje-prestador-enviado/${token.token}`);
   }
 
-  public getMensajeConsumidorEnviado (token: IToken): Observable<any> {
-    return this._httpClient.get<any>(`${this.urlBase}/mensaje-consumidor-enviado/${token.token}`);
+  public deleteTrabajoPrestadorEnviado (id: string, token: IToken): Observable<any> {
+    return this._httpClient.delete<any>(`${this.urlBase}/mensaje-prestador-enviado/${token.token}`, { body: { id } });
   }
 
   public getRoles(token: IToken): Observable<any> {
