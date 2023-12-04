@@ -14,7 +14,7 @@ import { Subject } from 'rxjs';
 })
 export class ApiService {
 
-  private urlBase = 'https://7csx60ms-3050.brs.devtunnels.ms';
+  private urlBase = 'https://proyecto-prestadores-hoyk3a4y7-langellos-projects.vercel.app';
   public textObserved: Subject<string> = new Subject<string>();
 
   constructor(private _httpClient: HttpClient) { }
