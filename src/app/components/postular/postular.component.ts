@@ -37,7 +37,7 @@ export class PostularComponent implements OnInit {
     this.loading = true;
     const asunto = contratarForm.get('asunto')?.value;
     const mensaje = contratarForm.get('mensaje')?.value;
-    const idDestino = window.location.pathname.split('/')[2];
+    const idDestino = parseInt(window.location.pathname.split('/')[2]);
     
 
     this._apiService.postMensajeAConsumidor(asunto, mensaje, idDestino, this.token).subscribe({

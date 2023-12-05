@@ -70,11 +70,11 @@ export class ApiService {
   public postConsumidor(consumidor: IConsumidor, token: IToken): Observable<IConsumidor> {
     return this._httpClient.post<IConsumidor>(`${this.urlBase}/consumidor`, { ...consumidor, ...token });
   }
-  public postMensajeAPrestador(asunto: string, mensaje: string, idDestino: string, token: IToken): Observable<any> {
+  public postMensajeAPrestador(asunto: string, mensaje: string, idDestino: number, token: IToken): Observable<any> {
     return this._httpClient.post<any>(`${this.urlBase}/mensaje-a-prestador`, { asunto, mensaje, idDestino, ...token });
   }
 
-  public postMensajeAConsumidor(asunto: string, mensaje: string, idDestino: string, token: IToken): Observable<any> {
+  public postMensajeAConsumidor(asunto: string, mensaje: string, idDestino: number, token: IToken): Observable<any> {
     return this._httpClient.post<any>(`${this.urlBase}/mensaje-a-consumidor`, { asunto, mensaje, idDestino, ...token });
   }
 

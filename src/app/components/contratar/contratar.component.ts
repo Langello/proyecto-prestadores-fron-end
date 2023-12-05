@@ -35,8 +35,7 @@ export class ContratarComponent implements OnInit {
     this.loading = true;
     const asunto = contratarForm.get('asunto')?.value;
     const mensaje = contratarForm.get('mensaje')?.value;
-    const idDestino = window.location.pathname.split('/')[2];
-    const token = localStorage.getItem('token') || '';
+    const idDestino = parseInt(window.location.pathname.split('/')[2]);
 
     this._apiService.postMensajeAPrestador(asunto, mensaje, idDestino, this.token).subscribe({
       next: (data: any) => {
