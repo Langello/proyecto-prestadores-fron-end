@@ -16,30 +16,7 @@ export class JobsComponent implements OnInit {
   loading: boolean = true;
 
   constructor(private _apiService: ApiService,
-  ) { }
-
-  ngOnInit(): void {
-    
-    this._apiService.getTrabajos("").subscribe({
-      next: (data: ITrabajo[]) => {
-        console.log(data);
-        this.listaTrabajos = data;
-        this.loading = false;
-      },
-      error: (error: any) => {
-        const alertElement = document.createElement('div');
-        alertElement.className = 'alert alert-warning container text-center fs-5';
-        alertElement.innerText = "No hay trabajos disponibles";
-        document.body.appendChild(alertElement);
-        console.error(error);
-        this.loading = false;
-        setTimeout(() => {
-          alertElement.remove();
-        }, 4000);
-
-      }
-    });
-
+  ) {
     this._apiService.textObserved.subscribe({
       next: (text: string) => {
         this.loading = true;
@@ -69,5 +46,32 @@ export class JobsComponent implements OnInit {
       }
     })
   }
+
+  ngOnInit(): void {
+
+    this._apiService.getTrabajos("").subscribe({
+      next: (data: ITrabajo[]) => {
+        console.log(data);
+        this.listaTrabajos = data;
+        this.loading = false;
+      },
+      error: (error: any) => {
+        const alertElement = document.createElement('div');
+        alertElement.className = 'alert alert-warning container text-center fs-5';
+        alertElement.innerText = "No hay trabajos disponibles";
+        document.body.appendChild(alertElement);
+        console.error(error);
+        this.loading = false;
+        setTimeout(() => {
+          alertElement.remove();
+        }, 4000);
+
+      }
+    });
+
+
+  }
+
+
 
 }

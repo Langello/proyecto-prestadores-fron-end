@@ -90,6 +90,7 @@ export class AccountComponent  implements OnInit {
 
     this._apiService.putUsuario(this.token, this.usuarioForm.value).subscribe({
       next: (data) => {
+        scroll(0, 0);
         const alertElement = document.createElement('div');
         alertElement.classList.add('alert', 'alert-success', 'container', 'text-center', 'fs-5', 'mt-1', 'mx-auto', 'w-50');
         alertElement.innerText = data.msg;

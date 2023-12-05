@@ -14,7 +14,7 @@ import { Subject } from 'rxjs';
 })
 export class ApiService {
 
-  private urlBase = 'https://proyecto-prestadores-hoyk3a4y7-langellos-projects.vercel.app';
+  private urlBase = 'https://7csx60ms-3050.brs.devtunnels.ms';
   public textObserved: Subject<string> = new Subject<string>();
 
   constructor(private _httpClient: HttpClient) { }
@@ -28,8 +28,6 @@ export class ApiService {
   }
 
   public getConsumidor(id: string): Observable<IConsumidor> {
-    console.log(id);
-    console.log(`${this.urlBase}/consumidor/${id}`);
     return this._httpClient.get<IConsumidor>(`${this.urlBase}/consumidor/${id}`);
   }
 
