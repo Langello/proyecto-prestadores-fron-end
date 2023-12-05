@@ -152,6 +152,7 @@ export class MyProfileConsumidorComponent implements OnInit {
   guardarCuenta() {
     this._apiService.putConsumidor(this.token, this.cuentaForm.value,).subscribe({
       next: (data: any) => {
+        window.scroll(0, 0);
         this._router.navigate(['/my-profile-consumer']);
         const alertElement = document.createElement('div');
         alertElement.className = 'alert alert-success container text-center fs-5 mt-1 mx-auto w-50';
